@@ -37,13 +37,20 @@ namespace XK
 
     void  BitBus::Clock()
     {
+
         digitalWrite(BITBUS_CLK, HIGH);
         if (platform_delay_)
         {   
             //ugly way to delay for 3B+.. cause normal thread_this:wait_until aint working!
-            auto waituntil = std::chrono::steady_clock::now() + std::chrono::nanoseconds(1);
-            while(true) if (std::chrono::steady_clock::now() > waituntil) break;
-        }
+            auto waituntil = std::chrono::high_resolution_clock::now() + std::chrono::nanoseconds(1);
+            while(true) if (std::chrono::high_resolution_clock::now() >= waituntil) break;
+        }       
+        else
+        {
+// TODO - TEST double clock with 3B+ and remove above ugglyness...
+            digitalWrite(BITBUS_CLK, HIGH);
+            digitalWrite(BITBUS_CLK, LOW);
+        }         
         digitalWrite(BITBUS_CLK, LOW);
     }
 

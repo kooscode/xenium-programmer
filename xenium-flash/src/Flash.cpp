@@ -170,9 +170,8 @@ namespace XK
         // flash: we=1, oe=1;
         bitbus_.Clock();
 
-        // 3B+ requires a small delay between writes..
-        if (platform_delay_)
-            delayMicroseconds(3);
+        // small delay between writes makes it much more stable
+        delayMicroseconds(3);
     }
 
 }
