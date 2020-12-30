@@ -110,8 +110,7 @@ I dubbed thee "BitBus" and was able to move data in and out of the flash pretty 
 You can install Xenium Programmer stack by doing the following: 
 
 - Clone this repo by running `git clone https://github.com/kooscode/xenium-programmer.git`
-- Then change the `install` script to be executable by doing a `chmod +x install`
-- Finally run `./install` script to download, build and install all the above mentioned tools
+- Run `./install` to download, build and install all the above mentioned tools.
 - This might take a while - please be patient!
 
 -------------
