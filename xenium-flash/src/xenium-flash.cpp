@@ -91,7 +91,7 @@ int main(int argc, char** argv)
 // ********************* FLASH CHIP ERASE ***************** 
     flash.ChipReset();
     std::string erase_ok;
-    std::cout << "This will ERASE your Xenium, ARE YOU SURE? (Yes/No): " << std::flush;
+    std::cout << "This will ERASE your Xenium Flash, ARE YOU SURE? (Yes/No): " << std::flush;
     std::getline (std::cin, erase_ok);
     if ((erase_ok.find("Y") != 0) &&  (erase_ok.find("y") != 0))
     {
