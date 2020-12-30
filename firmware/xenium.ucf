@@ -1,0 +1,55 @@
+#OPENXENIUM - XC9572XL-VQ64-10
+
+# ************* LED **************
+NET "led<0>" 	LOC="P10"; 
+NET "led<1>"	LOC="P11"; 
+NET "led<2>"  LOC="P12"; 
+
+# ********** bitbus **************
+NET "bitbus_data<0>"	LOC="P22"; 
+NET "bitbus_data<1>"	LOC="P24"; 
+NET "bitbus_data<2>"	LOC="P25"; 
+NET "bitbus_data<3>" 	LOC="P23"; 
+NET "bitbus_mode" 		LOC="P19";
+NET "bitbus_clk"			LOC="P17" | BUFG=DATA_GATE; #Repurpose GCLK
+#NET "not_connected"	LOC="P20: #LFRAME goes to D0 on 1.6
+
+# ************* FLASH ************
+# Address
+NET "flash_addr<0>"  	LOC="P47"; 
+NET "flash_addr<1>"  	LOC="P35"; 
+NET "flash_addr<2>"  	LOC="P1"; 
+NET "flash_addr<3>"  	LOC="P2"; 
+NET "flash_addr<4>"  	LOC="P4"; 
+NET "flash_addr<5>"  	LOC="P5"; 
+NET "flash_addr<6>"  	LOC="P64"; 
+NET "flash_addr<7>"  	LOC="P63"; 
+NET "flash_addr<8>"  	LOC="P62"; 
+NET "flash_addr<9>"  	LOC="P59"; 
+NET "flash_addr<10>"  LOC="P58"; 
+NET "flash_addr<11>"  LOC="P57"; 
+NET "flash_addr<12>"  LOC="P56"; 
+NET "flash_addr<13>"  LOC="P52"; 
+NET "flash_addr<14>"  LOC="P51"; 
+NET "flash_addr<15>"  LOC="P50"; 
+NET "flash_addr<16>"  LOC="P49"; 
+NET "flash_addr<17>"  LOC="P48"; 
+NET "flash_addr<18>"  LOC="P61"; 
+NET "flash_addr<19>"  LOC="P60"; 
+NET "flash_addr<20>"  LOC="P9"; 
+
+# Data
+NET "flash_data<0>"  LOC="P38"; 
+NET "flash_data<1>"  LOC="P39"; 
+NET "flash_data<2>"  LOC="P40"; 
+NET "flash_data<3>"  LOC="P42"; 
+NET "flash_data<4>"  LOC="P43"; 
+NET "flash_data<5>"  LOC="P44"; 
+NET "flash_data<6>"  LOC="P45"; 
+NET "flash_data<7>"  LOC="P46"; 
+
+# Control
+NET "flash_oe"	LOC="P36"; 
+NET "flash_we"	LOC="P7"; 
+
+
