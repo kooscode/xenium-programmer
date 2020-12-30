@@ -4,21 +4,21 @@
 
 #### The tools in this repo will allow you to use a Raspberry PI to pogram an OpenXenium chip with the Xilinx CPLD Firmware  via JTAG and will also upload a XeniumOS images into the OpenXenium Flash memory via a custom 4-bit bus NOR Flash programming protocol. 
 
-Scroll down to -- INSTALL -- to skip the write-up.. :)
+Scroll down to  the -- INSTALLING THE XENIUM PROGRAMMER -- section to skip the write-up.. :)
 
 ### NOTE: This has only been tested on PI Zero W and PI 3B+ models so far.
 
 -------------
 ## How does a "Original XBOX Mod" chip work?
-Running unsigned code on the Original XBOX has been around for almost the entire 20 years of the console's existence here is a very high level explenation of how modern mod chips get injected code running on the Original XBOX.
+Running unsigned code on the Original XBOX has been around for almost the entire 20 years of the console's existence here is a very high level explanation of how modern mod chips forces an external BIOS to load on Original XBOX.
 
 - The Original Xbox (OGX) is a plain vanilla Intel CPU and NVidia GPU system and runs a watered down Windows based Kernel. So for all practical purposes its pretty much a Windows PC.
 
-- The Kernel, along with boot loaders are stored in encrypted form onboard a Flash chip, termed the "TSOP" chip. 
+- The Kernel, along with boot loaders are encrypted and stored onboard a Flash chip, termed the "TSOP" chip. 
 
 - When the System starts up, the South Bridge (MCPX) has hard coded instructions to load the BIOS from the TSOP chip, validate signatures and start boot loader execution. If your BIOS is not signed by MS and does not match the hardware embedded signature, the MCPX will abort. (More on that for a later repo ;) )
 
-- One small (but very important) detail is that the MCPX will check value of bit 0 at address 0 on the BIOS and if it has the value 0, it will abandon loading the BIOS from TSOP and will instead revert to loading a BIOS from the onboard Low Pin Count (LPC) bus!
+- One small (but very important) detail is that the MCPX will check the value of bit 0 at address 0 of the TSOP and if it has the value 0, it will abandon loading the BIOS from TSOP and will instead revert to loading a BIOS from the onboard Low Pin Count (LPC) bus!
 
 - So, by grounding the TSOP chip Data 0 line (D0) you can force a 0 value on bit 0 at address 0 and the MCPX will load a BIOS externally! This works on all OGX motherboard revisions 1.0 - 1.4  (Thanks Microsoft!!)
 
@@ -27,17 +27,19 @@ Running unsigned code on the Original XBOX has been around for almost the entire
 - So - What does a mod chip do?  Well, its pretty easy, it simply asserts D0 to ground on motherboard revision 1.0-1.4 boards or it aborts the onboard LPC BIOS on 1.6 boards and makes its own BIOS available on the LPC bus for the MCPX to load!
 
 ## How do you inject a BIOS on the LPC bus?
-The OGX BIOS is only 256kb in size and although the MCPX loads top 16MB via the LPC bus, its really the same 256kb repeated x64 times and the very first mod chips were simply just SST-49LF040A LPC based 256kb flash memory chips that you connected directly to the motherboard LPC bus and grounded TSOP pin D0 to force the MCPX to load the BIOS from your external chip!  The 1.6 version board requires a Quick Solder Board (QSB) to re-instate some removed LPC bus wires Microsoft removed, but you can still do this on 1.6 boards with some wiring tricks.
+
+
+The OGX BIOS is only 256kb in size and although the MCPX loads the top 16MB via the LPC bus, its really the same 256kb repeated x64 times. Some of the very first LPC mod chips were simply just SST-49LF040A LPC based 256kb flash memory chips that you connected directly to the motherboard LPC bus and grounded TSOP pin D0 to force the MCPX to load the BIOS from your external chip!  The 1.6 version board requires a Quick Solder Board (QSB) to re-instate some removed LPC bus wires Microsoft removed, but you can still do this on 1.6 boards with some wiring tricks.
+
+More modern mod chips however does a very clever trick where they store a larger or even multuple BIOS images in a large NOR parallel flash chip that requires 21-Address + 8-Data + 2-Control pins to read data. These clever mod chips then employ a Complex Programmable Logic Device (CPLD) in the between the parallel NOR flash and the LPC bus to act as a bridge between the two!!  Essentially the CPLD takes incoming LPC protocol requests and translates them to parallel NOR flash requests and vice versa..  The MCPX all the while thinks it is speaking to a LPC chip and doesnt know the difference!!
 
 ![mcpx-lpc](images/mcpx-lpc.png)
 
-More modern mod chips however does a very clever trick where they store a larger or even multuple BIOS images in a large NOR parallel flash chip that requires 21-Address + 8-Data + 2-Control pins to read and uses Complex Programmable Logic Device (CPLD) in the between that NOR flash and the LPC bus to act as a bridge between the two!!  Essentially the CPLD takes incoming LPC protocol requests and translates them to prallel NOR flash requests and vice versa..  The MCPX things its speaking to a LPC chip and doesnt know the difference!!
-
 ## OpenXenium by Ryzee119
 
-![Open Xenium Installed](https://github.com/Ryzee119/OpenXenium/blob/master/Images/20191018_212705.jpg?raw=true)
+One such a "modern" mod chip was the Xenium that sported a 1MB parallel flash (enough for 4x256kb BIOS or 2x512kb or 1x1mb or any combaniation of these) and a Xilinx CPLD in the middle to do the LPC translation. Unfortunately after 20 years it became extinct and is no longer available. But, thanks to the VERY clever work by the super talented Ryzee119 (who reverse engineered this mod chip entirely from scratch), we today have the "Open Xenium" that is a 100% complete version of the original Xenium mod chip! And to top it all, its completely free Open Source!!
 
-One such a "modern" mod chip was the Xenium that sported a 1MB parallel flash (enough for 4x256kb BIOS images) and a Xilinx CPLD to do the LPC translation. Unfortunately after 20 years it became extinct and is no longer available. But, thanks to the VERY clever work by the super talented Ryzee119. who reverse engineered this mod chip entirely from scratch, we today have the "Open Xenium" that is a 100% complete version of the original Xenium mod chip! And to top it all, its completely free Open Source!!
+![Open Xenium Installed](https://github.com/Ryzee119/OpenXenium/blob/master/Images/20191018_212705.jpg?raw=true)
 
 THANKS RYZEE119!!!!
 
@@ -53,7 +55,7 @@ Ryzee119 provides the Xilinx CPLD's source code for LPC translation, but you sti
 
 - Uploading the CPLD firmware can be done using a a select few JTAG programmers, but the official Xilinx programmers are expensive (about $250) and hard to use and most people do not have access to them. 
 
-- Uploading the BIOS to Flash memory can be done prior to installing the chip on the Xenium board via NOR Flash programmer, but that is also expensive (about $60), cumbersone and most people do not have access programmers not to the chip prior to soldering onto the Xenium board..  
+- Uploading the BIOS to Flash memory can be done prior to installing the chip on the Xenium board via NOR Flash programmer, but that is also expensive (about $60), cumbersone and most people do not have access programmers or the bare Flash chip prior to it being soldered onto the Xenium board..  
 
 - You can also upload the BIOS via an already modded XBOX by hot swapping an existing LPC mod chip with a blank OpenXenium chip and using Ryzee119's xenium-tools, but that kinda defeats the purpose of using an already modded XBOX.
 
@@ -66,17 +68,19 @@ I recently ran across a web article that showed JTAG programming a Xilinx FPGA v
 
 See: https://linuxjedi.co.uk/2020/12/01/programming-xilinx-jtag-from-a-raspberry-pi/
 
-Now - if you can also get it to upload the BIOS to the Xenium Flash memory, that would make the PERFECT little Xenium programmer and for $5 more, you can make it a wireless remote and even standalone programmer!!
+Now - if you can also get it to upload the BIOS to the Xenium Flash memory, that would make the PERFECT little Xenium programmer and for $5 more, you can make it a wireless remote and even standalone end-to-end OpenXenium mod chip programmer!!
 
-I downloaded the XC3SPROG tool and it worked fantastic! I could JTAG program the CPLD in 12 seconds flat!! So, I set about looking at how to bit-bang LPC through the Raspberry PI's GPIO ports and program Xenium Flash memory.
+I downloaded the XC3SPROG tool and it worked fantastic! I could JTAG program the Xilinx CPLD in 12 seconds flat!! 
+
+So, I set about looking at how to bit-bang LPC through the Raspberry PI's GPIO ports and program Xenium Flash memory.
 
 This turned out to be a little harder and very slow.. I could not get less than about 10 minutes of programming time and finally abandoned that idea.. 
 
-So, then I tried implementing a SPI Slave in Verilog HDL so I can turn the Xenium CPLD into the more common SPI to NOR Flash bridge/translator, instead of OGX's LPC. The Xenium Already had a nifty SPI connector that I could re-use too!
+So, then I tried implementing a SPI Slave in Verilog HDL, so instead of OGX's LPC bus, I can turn the Xenium CPLD into the more common SPI to NOR Flash bridge/translator. The Xenium Already had a nifty SPI connector that I could re-use too!
 
 ![pi-programmer](images/pi-spi.jpg)
 
-This worked really great, except it was SLOOOOW... The problem is that the Xenium CPLD does not have an onboard oscillator and relies on the XBOX LPC 33Mhz Clock and i tried feeding it a clock from the PI's GPIO ports, but could never get above 8Mhz clock and 1Mhz SPI bus..  And since SPI is essential a 1-bit bus, it took about 8 minutes to program the 1MB of flash via SPI. So sad..
+This worked really great, except it was SLOOOOW... The problem is that the Xenium CPLD does not have an onboard oscillator and relies on the XBOX LPC 33Mhz Clock and i tried feeding it a clock from the PI's GPIO ports, but could never get above 8Mhz clock and 1Mhz SPI bus..  And since SPI is essentially a 1-bit bus, it took about 8 minutes to program the 1MB of flash via SPI. So sad..
 
 Back to the drawing board!!...
 
@@ -84,22 +88,27 @@ Back to the drawing board!!...
 
 ![pi-programmer](images/bitbus2flash.png)
 
-I decided to re-purpose the LPC bus header and write Verilog HDL code that will stream 4-bits at a time and translate that directly into the parallel flash programming/reading sequences. Think of it as a shift register, but instead of shifting 1-bit at a time for the 21-bit address and 8-bit data (29-bits), i would just 4-bits in/out at a time and can clock the shifts manually and control direction via a seperate pin..  The LPC header exposes 7 pins in the CPLD, so I should have plently re-usable pins! 
+I decided to re-purpose the LPC bus header and write Verilog HDL code that will stream 4-bits at a time and translate that directly into the parallel flash programming/reading sequences. Think of it as a shift register, but instead of shifting 1-bit at a time for the 21-bit address and 8-bit data (29-bits), i would just bang 4-bits in/out at a time and can clock the 4-bit data in/out manually and control direction via seperate GPIO pins..  The LPC header exposes 7 pins in the CPLD, so I should have plently re-usable pins! 
 
-I then wrote an app (xenium-flash) in C++ for the PI to control and upload flash images using GPIO pins and this worked GREAT!!  I could now program the Xenium Flash memory in about 60 seconds !!
+I dubbed thee "BitBus" and was able to move data in and out of the flash pretty speedily.. I then wrote an app (xenium-flash) in C++ for the PI to control and upload data using GPIO pins to the Xenium Flash via the "BitBus" CPLD translator in the middle and a decent speed.
 
 ### Wooho!! Now I can program the Xenium CPLD and the Flash Menory!!
 
 ![pi-programmer](images/bitbus.png)
 
-- I used the `XC3SPROG` tool to program the CPLD with my "BitBus to Flash tranlator" firmware
-- Then I use my `xenium-flash` tool to upload the flash image to the Xenium Flash memory via my custom fast 4-bit "BitBus"
-- And finally, I use the `XC3SPROG` tool again to program the Xilinx CPLD with Ryzee119's OpenXenium Firmware!!
+- I used the `XC3SPROG` tool to program the CPLD with my "BitBus CPLD" firmware
+- Then I used my `xenium-flash` tool to upload the flash image to the Xenium Flash memory via my custom fast 4-bit "BitBus"
+- And finally, I used the `XC3SPROG` tool again to program the Xilinx CPLD with Ryzee119's OpenXenium Firmware!!
 
-BOOM! We have lift off!!!
+### BOOM! We have lift off!!!
+
+![Xenium-OS](images/xenium-os.jpg)
 
 -------------
-## -- INSTALL -- 
+## -- INSTALLING THE XENIUM PROGRAMMER -- 
+
+You can install Xenium Programmer stack by doing the following: 
+
 - Clone this repo by running `git clone https://github.com/kooscode/xenium-programmer.git`
 - Then change the `install` script to be executable by doing a `chmod +x install`
 - Finally run `./install` script to download, build and install all the above mentioned tools
@@ -124,7 +133,7 @@ BOOM! We have lift off!!!
 -------------
 ## -- PROGRAMMING A XENIUM CPLD AND FLASH MEMORY --
 
-This repo includes the OpenXenium Firmware ans well as the XeniumOS 2.3.1 images for BLUE, GOLD and ICE themes.
+This repo includes the OpenXenium Firmware as well as the XeniumOS 2.3.1 images for BLUE, GOLD and ICE themes.
 
 - You can upload any XeniumOS image to the Xenium Flash by using the `xenium-programmer` in the root of this repo
 - NOTE - The xenium-programmer tool, already has the Bitbus and OpenXenium firmware locations built in!
