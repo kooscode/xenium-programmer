@@ -112,6 +112,7 @@ You can install Xenium Programmer stack by doing the following:
 - Clone this repo by running `git clone https://github.com/kooscode/xenium-programmer.git`
 - Run `./install` to download, build and install all the above mentioned tools.
 - This might take a while - please be patient!
+- BTW - the XC3SPROG build takes a while and has a bunch of warnings.. its normal..
 
 -------------
 ## -- HOOKING UP THE HARDWARE --
