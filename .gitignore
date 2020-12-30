@@ -50,10 +50,8 @@
 *.ipf
 *.cmd_log
 *_xdb
-*.bin
 *.mod
 *.data
-*.jed
 *.blx
 sch2HdlBatchFile
 main_html
