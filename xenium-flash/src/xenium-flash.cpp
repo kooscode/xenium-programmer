@@ -195,7 +195,7 @@ int main(int argc, char** argv)
     //reset to turn LED blue..
     flash.ChipReset();
 
-    std::cout << std::endl << "Xenium Flash SUCCESS!!" << std::endl;
+    std::cout << std::endl << "Xenium Flash SUCCESS!!" << std::endl << std::endl;
 
     return 0;
 }

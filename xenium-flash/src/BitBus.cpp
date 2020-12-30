@@ -7,12 +7,18 @@
 
 #include "PiPinMap.h"
 
-//BitBus pins
+//BitBus pins connected to LPC Header
+// BITBUS D0 => LPC LAD0
 #define BITBUS_D0 GPIO_16
+// BITBUS D1 => LPC LAD1
 #define BITBUS_D1 GPIO_21
+// BITBUS D2 => LPC LAD2
 #define BITBUS_D2 GPIO_18
+// BITBUS D3 => LPC LAD3
 #define BITBUS_D3 GPIO_20
+// BITBUS CLK => LPC LCLK
 #define BITBUS_CLK GPIO_24
+// BITBUS DIR => LPC RST
 #define BITBUS_DIR GPIO_23
 
 namespace XK
