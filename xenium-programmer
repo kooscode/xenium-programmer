@@ -16,7 +16,9 @@ XENIUM_JED=xenium-bin/openxenium.jed
 FLASH_JED=xenium-bin/xeniumflash.jed
 
 # Program the Xilinx CPLD with BitBus to Flash Bridge code.
-echo -e '\n PROGRAMMING XILINX: BITBUS BRIDGE  \n'
+echo -e '--------------------------------------'
+echo -e 'PROGRAMMING XILINX CPLD: BITBUS BRIDGE'
+echo -e '--------------------------------------'
 xc3sprog -c xpc -c matrix_creator -v -p 0 $FLASH_JED
 if [ $? -ne 0 ]
 then
@@ -26,7 +28,6 @@ then
 fi
 
 # Send XeniumOS Image to Flash Memory via bitbus bridge
-echo -e '\n UPLOADING XENIUM FLASH MEMORY IMAGE '
 xenium-flash/bin/xenium-flash $XENIUM_OS
 if [ $? -ne 0 ]
 then
@@ -36,7 +37,9 @@ then
 fi
 
 # Program the Xilinx CPLD with OpenXenium Firmware
-echo -e '\n PROGRAMMING XILINX: OPEN XENIUM FIRMWARE  \n'
+echo -e '---------------------------------------------'
+echo -e 'PROGRAMMING XILINX CPLD: OPEN XENIUM FIRMWARE'
+echo -e '---------------------------------------------'
 xc3sprog -c xpc -c matrix_creator -v -p 0 $XENIUM_JED
 if [ $? -ne 0 ]
 then
