@@ -1,8 +1,8 @@
 # OpenXenium JTAG and Flash Memory programmer
 
-### The tools in this repo will allow you to use a Raspberry PI to pogram an OpenXenium chip with the CPLD Firmware (JED)via JTAG and will also upload a XeniumOS images into the OpenXenium Flash memory via a custom 4-bit bus NOR Flash programming protocol. 
-
 ![boot-partition](images/xenium-flash.jpg)
+
+#### The tools in this repo will allow you to use a Raspberry PI to pogram an OpenXenium chip with the CPLD Firmware (JED)via JTAG and will also upload a XeniumOS images into the OpenXenium Flash memory via a custom 4-bit bus NOR Flash programming protocol. 
 
 ### NOTE: This has only been tested on PI Zero W and PI 3B+ models so far.
 
