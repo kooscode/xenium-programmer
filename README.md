@@ -92,7 +92,7 @@ I decided to re-purpose the LPC bus header and write Verilog HDL code that will 
 
 I dubbed thee "BitBus" and was able to move data in and out of the flash pretty speedily.. I then wrote an app (xenium-flash) in C++ for the PI to control and upload data using GPIO pins to the Xenium Flash via the "BitBus" CPLD translator in the middle and a decent speed.
 
-### Wooho!! Now I can program the Xenium CPLD and the Flash Menory!!
+### Wooho!! Now I can program the Xenium CPLD and the Flash Memory!!
 
 ![pi-programmer](images/bitbus.png)
 
