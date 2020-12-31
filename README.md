@@ -124,9 +124,9 @@ You can install Xenium Programmer stack by doing the following:
 
 ![jtag-pinout](images/jtag-pinout.png)
 
-### -- FLASH PROGRAMMING PINS --
+### FLASH PROGRAMMING PINS
 - These pins are configurable in the `BitBus.cpp` file of the `xenium-flash` app source.
-- I chose these pins purely for convenience of my board layout, use them as as, or change it as you see fit.. 
+- I chose these pins purely for convenience of my board layout, use them as is, or change it as you see fit.. 
 
 ![bitbus-pinout](images/bitbus-pinout.png)
 
@@ -137,7 +137,7 @@ This repo includes the OpenXenium Firmware as well as the XeniumOS 2.3.1 images 
 
 - You can upload any XeniumOS image to the Xenium Flash by using the `xenium-programmer` in the root of this repo
 - NOTE - The xenium-programmer tool, already has the Bitbus and OpenXenium firmware locations built in!
-- For example to program the XeniumOS GOLD you would run: `./xenium-programmer xenium-bin/xenium_blue.bin` 
+- Example: `./xenium-programmer xenium-bin/xenium_blue.bin`  (This will program the BLUE themed XeniumOS)
 
 ![jtag-pinout](images/sshot.png)
 
