@@ -124,7 +124,7 @@ You can install Xenium Programmer stack by doing the following:
 
 ![jtag-pinout](images/jtag-pinout.png)
 
-### -- FLASH PROGRAMMING PINS --
+### FLASH PROGRAMMING PINS
 - These pins are configurable in the `BitBus.cpp` file of the `xenium-flash` app source.
 - I chose these pins purely for convenience of my board layout, use them as is, or change it as you see fit.. 
 
