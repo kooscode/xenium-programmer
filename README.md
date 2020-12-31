@@ -117,7 +117,7 @@ You can install Xenium Programmer stack by doing the following:
 -------------
 ## -- HOOKING UP THE HARDWARE --
 
-![jtag-pinout](images/connections.jpg)
+![jtag-pinout](images/connections.png
 
 ### JTAG PROGRAMMING PINS
 - You need to hook up the JTAG pins for XC3SPROG in a specific way.. AFAIK, they are not configurable.. 
