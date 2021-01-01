@@ -42,7 +42,7 @@ namespace XK
     uint8_t Flash::GetManufacturerID()
     {
         // Identification Command
-        // Address 0x02 = ManufacturerID 
+        // Address 0x00 = ManufacturerID 
         SetBusMode(BITBUS_WRITE);
         WriteByte(0xAAA, 0xAA);
         WriteByte(0x555, 0x55);
@@ -132,7 +132,7 @@ namespace XK
         uint8_t bb_data = 0x00;
         uint8_t* addr_byte = (uint8_t*) &address;
 
-        // transmit address 24 bits of address
+        // transmit 24-bits of address (only 21-bits are used)
         SetGPIOMode(GPIO_OUT);
         bitbus_.WriteByte(addr_byte[0]);
         bitbus_.WriteByte(addr_byte[1]);
@@ -141,7 +141,7 @@ namespace XK
         // flash: we=1, oe=0;
         bitbus_.Clock();
 
-        // read 8 bit data
+        // read 8-bit data
         SetGPIOMode(GPIO_IN);
         bb_data = bitbus_.ReadByte();
 
@@ -155,7 +155,7 @@ namespace XK
     {
         uint8_t* addr_byte = (uint8_t*) &address;
         
-        //transmit address 24 bits of address
+        // transmit 24-bits of address (only 21-bits are used)
         SetGPIOMode(GPIO_OUT);
         bitbus_.WriteByte(addr_byte[0]);
         bitbus_.WriteByte(addr_byte[1]);
