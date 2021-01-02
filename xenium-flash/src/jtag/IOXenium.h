@@ -1,4 +1,4 @@
-/* WiringPI implementation of XC3SPROG IOBase
+/* WiringPI implementation of for Xenium CPLD
 
 Copyright (C) 2019-2020 Koos du Preez (kdupreez@hotmail.com)
 

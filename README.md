@@ -66,11 +66,7 @@ Ryzee119 provides the Xilinx CPLD's source code for LPC translation, but you sti
 
 I recently ran across a web article that showed JTAG programming a Xilinx FPGA via a Raspberry PI using a tool called XC3SPROG and I thought that would be a great platform to program a Xenium's CPLD !!
 
-See: https://linuxjedi.co.uk/2020/12/01/programming-xilinx-jtag-from-a-raspberry-pi/
-
-Now - if you can also get it to upload the BIOS to the Xenium Flash memory, that would make the PERFECT little Xenium programmer and for $5 more, you can make it a wireless remote and even standalone end-to-end OpenXenium mod chip programmer!!
-
-I downloaded the XC3SPROG tool and it worked fantastic! I could JTAG program the Xilinx CPLD in 12 seconds flat!! 
+I extracted pieces from XC3SPROG source code that will allow JTAG programming of just the Xenium CPLD and it worked fantastic! I can JTAG program the Xilinx CPLD in 12 seconds flat!! 
 
 So, I set about looking at how to bit-bang LPC through the Raspberry PI's GPIO ports and program Xenium Flash memory.
 
@@ -111,8 +107,6 @@ You can install Xenium Programmer stack by doing the following:
 
 - Clone this repo by running `git clone https://github.com/kooscode/xenium-programmer.git`
 - Run `./install` to download, build and install all the above mentioned tools.
-- This might take a while - please be patient!
-- BTW - the XC3SPROG build takes a while and has a bunch of warnings.. its normal..
 
 -------------
 ## -- HOOKING UP THE HARDWARE --
@@ -120,12 +114,13 @@ You can install Xenium Programmer stack by doing the following:
 ![jtag-pinout](images/connections.png)
 
 ### JTAG PROGRAMMING PINS
-- You need to hook up the JTAG pins for XC3SPROG in a specific way.. AFAIK, they are not configurable.. 
+- The JTAG pins are configurable by editing the `XeniumDefines.h` file 
+- I chose these pins for XC3SPROG compatability, use them as is, or change it as you see fit.. 
 
 ![jtag-pinout](images/jtag-pinout.png)
 
 ### FLASH PROGRAMMING PINS
-- These pins are configurable in the `BitBus.cpp` file of the `xenium-flash` app source.
+- The FLASH pins are configurable by editing the `XeniumDefines.h` file.
 - I chose these pins purely for convenience of my board layout, use them as is, or change it as you see fit.. 
 
 ![bitbus-pinout](images/bitbus-pinout.png)
