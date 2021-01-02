@@ -1,3 +1,10 @@
+# xenium-jtag
+
+This is the app that programs the OpenXenium Flash memory CPLD. See the main README for more details 
+
+- This app will be built and installed automatically via the main `install` script.
+
+
 # xenium-flash
 
 This is the main app that uploads XeniumOS images into the OpenXenium Flash memory. See the main README for more details 
