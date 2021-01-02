@@ -141,4 +141,4 @@ This repo includes the OpenXenium Firmware as well as the XeniumOS 2.3.1 images 
 ### Created by Koos du Preez - kdupreez@hotmail.com (Comments, improvements, critique, etc. is welcome!)
 
 ### Ryzee119: For OpenXenium Firmware and hardware and all round awesomeness!
-### XC3SPROG: Not sure who to thank here, but it wont be possible without this tool :)
+### XC3SPROG: Not sure who to thank here, but the source code was pivotal in making this work!

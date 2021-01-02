@@ -7,7 +7,7 @@ echo -e '-------------------------------------------'
 echo -e '\n  INSTALLING UPDATES AND REQUIREMENTS\n'
 echo -e '-------------------------------------------'
 sudo apt -y update
-sudo apt -y install build-essential libusb-dev libftdi-dev libgpiod-dev wiringpi git cmake
+sudo apt -y install build-essential wiringpi git cmake
 
 # make and install xenium-flash to bin
 echo -e '----------------------------------------------------------'

@@ -59,6 +59,7 @@ _xmsgs
 _ngo
 xst
 iseconfig
-!release/*.txt
 xc3sprog
 .vscode
+xenium-flash/bin
+
