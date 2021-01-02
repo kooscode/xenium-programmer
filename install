@@ -9,30 +9,20 @@ echo -e '-------------------------------------------'
 sudo apt -y update
 sudo apt -y install build-essential libusb-dev libftdi-dev libgpiod-dev wiringpi git cmake
 
-#install XC3SPROG
-echo -e '-----------------------'
-echo -e '\n INSTALLING XC3SPROG\n'
-echo -e '-----------------------'
-git clone https://github.com/matrix-io/xc3sprog 
-mkdir xc3sprog/build
-cd xc3sprog/build
-cmake .. 
-make
-sudo make install
-cd ../..
-
 # make and install xenium-flash to bin
-echo -e '-----------------------------------------------'
-echo -e '\n BUILDING AND INSTALLING XENIUM-FLASH TOOL\n'
-echo -e '-----------------------------------------------'
+echo -e '----------------------------------------------------------'
+echo -e '\n BUILDING AND INSTALLING XENIUM JTAG AND FLASH TOOLS\n'
+echo -e '----------------------------------------------------------'
 cd xenium-flash
 make
-cp bin/xenium-flash /usr/local/bin
+sudo cp bin/xenium-jtag /usr/local/bin
+sudo cp bin/xenium-flash /usr/local/bin
 cd ..
 
 chmod +x xenium-programmer
 
 echo -e '\n** INSTALL COMPLETE **\n'
 
+echo -e '\nTo program your Xenium, just run:\n\t ./xenium-programmer xenium-bin/xenium_blue.bin \n'
 
 

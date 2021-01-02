@@ -32,7 +32,7 @@ int main(int argc, char** argv)
     std::string pi_version = flash.GetPiVersion();
     std::cout << "Checking PI Hardware: " << pi_version << std::endl;
 
-// ********************  LOADNIG FLASH FILE ***************
+// ********************  LOADING FLASH FILE ***************
     std::string infile = argv[1];
     std::cout << "Loading Xenium Flash BIN: " << infile << std::endl;
 
