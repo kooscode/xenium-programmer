@@ -22,8 +22,8 @@ The tools in this repo will allow you to use a Raspberry PI to program an OpenXe
 -------------
 ## PROGRAMMING A XENIUM CPLD AND FLASH MEMORY
 
-- You can program XeniumOS and OpenXenium Firmware in one step.
-- Run: `./xenium-programmer xenium-bin/xenium_blue.bin`  
+- You can program XeniumOS and OpenXenium Firmware in one single step.
+- Run: `./xenium-programmer`  
 
 ![jtag-pinout](images/sshot.png)
 
