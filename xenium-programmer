@@ -28,9 +28,9 @@ then
 fi
 
 # Send XeniumOS Image to Flash Memory via bitbus bridge
-echo -e '----------------------'
-echo -e 'UPLOADING XENIUM FLASH'
-echo -e '----------------------'
+echo -e '-----------------------------'
+echo -e 'PROGRAMMING FLASH : XENIUM OS'
+echo -e '-----------------------------'
 xenium-flash/bin/xenium-flash $XENIUM_OS
 if [ $? -ne 0 ]
 then
