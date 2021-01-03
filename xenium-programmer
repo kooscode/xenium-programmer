@@ -15,7 +15,7 @@ XENIUM_OS=$1
 XENIUM_JED=xenium-bin/openxenium.jed
 FLASH_JED=xenium-bin/xeniumflash.jed
 
-# Program the Xilinx CPLD with BitBus to Flash Bridge code.
+# Program the Xilinx CPLD with BitBus2Flash firmware.
 echo -e '--------------------------------------'
 echo -e 'PROGRAMMING XILINX CPLD: BITBUS BRIDGE'
 echo -e '--------------------------------------'
