@@ -11,19 +11,19 @@ The tools in this repo will allow you to use a Raspberry PI to program an OpenXe
 -------------
 ## INSTALLING THE XENIUM PROGRAMMER
 
-You can install Xenium Programmer stack by doing the following: 
+- Clone this repo by running: `git clone https://github.com/kooscode/xenium-programmer.git`
+- Then run: `./install`
 
-- Clone this repo by running `git clone https://github.com/kooscode/xenium-programmer.git`
-- Run `./install` to download, build and install all the above mentioned tools.
+## UPDATING XENIUM PROGRAMMER
+
+- Pull the latest code with: `git pull`
+- Then run: `./install` 
 
 -------------
 ## PROGRAMMING A XENIUM CPLD AND FLASH MEMORY
 
-This repo includes the OpenXenium Firmware as well as the XeniumOS 2.3.1 images for BLUE, GOLD and ICE themes.
-
-- You can upload any XeniumOS image to the Xenium Flash by using the `xenium-programmer` in the root of this repo
-- NOTE - The xenium-programmer tool, already has the Bitbus and OpenXenium firmware locations built in!
-- Example: `./xenium-programmer xenium-bin/xenium_blue.bin`  (This will program the BLUE themed XeniumOS)
+- You can program XeniumOS and OpenXenium Firmware in one step.
+- Run: `./xenium-programmer xenium-bin/xenium_blue.bin`  
 
 ![jtag-pinout](images/sshot.png)
 
