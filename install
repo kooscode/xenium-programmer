@@ -23,6 +23,6 @@ chmod +x xenium-programmer
 
 echo -e '\n** INSTALL COMPLETE **\n'
 
-echo -e '\nTo program your Xenium, just run:\n\t ./xenium-programmer xenium-bin/xenium_blue.bin \n'
+echo -e '\nProgram your Xenium by running:\n\t ./xenium-programmer\n'
 
 
