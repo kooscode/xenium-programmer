@@ -3,17 +3,15 @@
 echo -e '\n OPEN XENIUM PROGRAMMER'
 echo -e '***************************\n'
 
-if [ $# -ne 1 ] ; then
-  echo -e 'Error: Xenium Flash Image file not supplied! \n'
-  echo -e '\tUsage: xenium-programmer [XENIUM_IMAGE]'
-  echo -e '\tExample: xenium-programmer xenium-bin/xenium_blue.bin \n'
-  exit 1
-fi
-
-# Paths to default JED files
-XENIUM_OS=$1
+# Paths to default Firmware and XeniumOS files
+XENIUM_OS=xenium-bin/xenium_blue.bin
 XENIUM_JED=xenium-bin/openxenium.jed
 FLASH_JED=xenium-bin/xeniumflash.jed
+
+if [ $# -eq 1 ] ; then
+  XENIUM_OS=$1
+  echo -e 'Using XeniumOS: ' $1
+fi
 
 # Program the Xilinx CPLD with BitBus2Flash firmware.
 echo -e '--------------------------------------'
