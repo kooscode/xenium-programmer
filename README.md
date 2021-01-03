@@ -4,6 +4,8 @@
 
 The tools in this repo will allow you to use a Raspberry PI to program an OpenXenium chip with the Xilinx CPLD Firmware via JTAG and will also upload XeniumOS images into the OpenXenium Flash memory via a custom 4-bit bus NOR Flash programming protocol. 
 
+** Read the [XBOX BIOS INJECTION](XBOX.md) write up for gory details **
+
 ### NOTE: This has only been tested on PI Zero W and PI 3B+ models so far.
 
 -------------
