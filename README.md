@@ -31,7 +31,7 @@ The tools in this repo will allow you to use a Raspberry PI to program an OpenXe
 ## HOOKING UP THE HARDWARE
 
 - The JTAG and FLASH pins are configurable by editing the `XeniumDefines.h` file 
-
+- If you edited the `XeniumDefines.h` file, make sure to run `./install` again
 ![bitbus-pinout](images/bitbus-pinout.png)  ![jtag-pinout](images/jtag-pinout.png)  
 
 ![jtag-pinout](images/connections.png)
