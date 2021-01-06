@@ -34,7 +34,7 @@ namespace XK
 
     void BitBusOmega2::DelayMicroseconds(uint64_t usec)
     {
-        usleep(usec);
+        // No sleep needed for Omega :)
     }
 
     std::string BitBusOmega2::GetHardwareString()
@@ -64,18 +64,6 @@ namespace XK
     {
 
         omega_.digitalWrite(BITBUS_CLK, OMEGA_HIGH);
-//         if (platform_delay_)
-//         {   
-//             //ugly way to delay for 3B+.. cause normal thread_this:wait_until aint working!
-//             auto waituntil = std::chrono::high_resolution_clock::now() + std::chrono::nanoseconds(1);
-//             while(true) if (std::chrono::high_resolution_clock::now() >= waituntil) break;
-//         }       
-//         else
-//         {
-// // TODO - TEST double clock with 3B+ and remove above ugglyness...
-//             omega_.digitalWrite(BITBUS_CLK, HIGH);
-//             omega_.digitalWrite(BITBUS_CLK, LOW);
-//         }         
         omega_.digitalWrite(BITBUS_CLK, OMEGA_LOW);
     }
 
