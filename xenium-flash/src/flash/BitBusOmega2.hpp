@@ -42,7 +42,6 @@ namespace XK
         private:
             void InitGPIO();
             FastGpioOmega2 omega_;
-            digitalRead
     };
 }
 

@@ -54,10 +54,10 @@ namespace XK
 
     void  BitBusOmega2::SetGPIOMode(GPIOMode gpiomode)
     {
-        omega_.pinMode(BITBUS_D0, gpiomode);
-        omega_.pinMode(BITBUS_D1, gpiomode);
-        omega_.pinMode(BITBUS_D2, gpiomode);
-        omega_.pinMode(BITBUS_D3, gpiomode);
+        omega_.pinMode(BITBUS_D0, (int)gpiomode);
+        omega_.pinMode(BITBUS_D1, (int)gpiomode);
+        omega_.pinMode(BITBUS_D2, (int)gpiomode);
+        omega_.pinMode(BITBUS_D3, (int)gpiomode);
     }
 
     void  BitBusOmega2::Clock()
@@ -108,17 +108,17 @@ namespace XK
 
         // receive lower nibble
         Clock();
-        inbyte = digitalRead(BITBUS_D0);
-        inbyte |= digitalRead(BITBUS_D1) << 1;
-        inbyte |= digitalRead(BITBUS_D2) << 2;
-        inbyte |= digitalRead(BITBUS_D3) << 3;
+        inbyte = omega_.digitalRead(BITBUS_D0);
+        inbyte |= omega_.digitalRead(BITBUS_D1) << 1;
+        inbyte |= omega_.digitalRead(BITBUS_D2) << 2;
+        inbyte |= omega_.digitalRead(BITBUS_D3) << 3;
 
         // receive upper nibble
         Clock();
-        inbyte |= digitalRead(BITBUS_D0) << 4;
-        inbyte |= digitalRead(BITBUS_D1) << 5;
-        inbyte |= digitalRead(BITBUS_D2) << 6;
-        inbyte |= digitalRead(BITBUS_D3) << 7;
+        inbyte |= omega_.digitalRead(BITBUS_D0) << 4;
+        inbyte |= omega_.digitalRead(BITBUS_D1) << 5;
+        inbyte |= omega_.digitalRead(BITBUS_D2) << 6;
+        inbyte |= omega_.digitalRead(BITBUS_D3) << 7;
 
         return inbyte;
     }
@@ -126,8 +126,8 @@ namespace XK
     void  BitBusOmega2::InitGPIO()
     {
         //setup BitBusOmega2 control pins
-        omega_.pinMode(BITBUS_CLK, GPIO_OUT);
-        omega_.pinMode(BITBUS_DIR, GPIO_OUT);
+        omega_.pinMode(BITBUS_CLK, (int)GPIO_OUT);
+        omega_.pinMode(BITBUS_DIR, (int)GPIO_OUT);
     }
 
 }
