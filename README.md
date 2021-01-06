@@ -8,10 +8,12 @@ The tools in this repo will allow you to use a Raspberry PI or an Onion Omega2+ 
 
 ### Raspberry PI:
 - This has only been tested on PI Zero W and PI 3B+ models so far.
+
 https://www.pishop.us/product/raspberry-pi-zero-w/
 
 ### Onion Omega2+:
 - This has been tested and works on the Onion Omega2+.
+
 https://Onion.io/store/omega2p
 
 -------------
