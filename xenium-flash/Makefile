@@ -37,7 +37,7 @@ ifeq ($(PLATFORM),OMEGA2)
 S6=$(OMEGA)/Module.cpp
 S7=$(OMEGA)/FastGpioOmega2.cpp
 S8=$(JTAG)/IOOmega2.cpp
-S9=$(JTAG)/BitBusOmega2.cpp
+S9=$(FLASH)/BitBusOmega2.cpp
 else
 S7=$(JTAG)/IOWiringPi.cpp
 S8=$(FLASH)/BitBusPI.cpp
