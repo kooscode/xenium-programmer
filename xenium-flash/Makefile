@@ -21,7 +21,7 @@ CXX=g++
 #G++ options
 # To Make Debug Build set: -g
 # To Debug with GDB run: gdb -ex=r --args APP ARG1 ARG2
-CFLAGS=-g -Wall -ansi
+CFLAGS=-Wall -ansi
 CPP_STD=c++17
 
 #include paths
