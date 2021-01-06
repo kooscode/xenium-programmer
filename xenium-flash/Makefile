@@ -34,10 +34,10 @@ S5=$(JTAG)/JedecFile.cpp
 S6=$(JTAG)/ProgAlgXC95X.cpp
 
 ifeq ($(PLATFORM),OMEGA2)
-S6=$(OMEGA)/Module.cpp
-S7=$(OMEGA)/FastGpioOmega2.cpp
-S8=$(JTAG)/IOOmega2.cpp
-S9=$(FLASH)/BitBusOmega2.cpp
+S7=$(OMEGA)/Module.cpp
+S8=$(OMEGA)/FastGpioOmega2.cpp
+S9=$(JTAG)/IOOmega2.cpp
+S10=$(FLASH)/BitBusOmega2.cpp
 else
 S7=$(JTAG)/IOWiringPi.cpp
 S8=$(FLASH)/BitBusPI.cpp
@@ -75,7 +75,7 @@ D4=
 #expand all options
 INC=$(I1) $(I2) $(I3) $(I4)
 INCLUDES=$(foreach d, $(INC), -I$d)
-SOURCES=$(S1) $(S2) $(S3) $(S4) $(S5) $(S6) $(S7) $(S8) $(S9)
+SOURCES=$(S1) $(S2) $(S3) $(S4) $(S5) $(S6) $(S7) $(S8) $(S9) $(10)
 LIB_PATH=$(LP1) $(LP2) $(LP3) $(LP4)
 LIB_PATHS=$(foreach d, $(LIB_PATH), -L$d)
 LIB=$(L1) $(L2) $(L3) $(L4) $(L5)
