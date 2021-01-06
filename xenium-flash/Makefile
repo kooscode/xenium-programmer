@@ -1,9 +1,16 @@
 APP_FLASH=xenium-flash
 APP_JTAG=xenium-jtag
-# PLATFORM=PI
-PLATFORM=OMEGA2
 SRC_MAIN=src
 OUT_DIR=bin
+
+# Default build is PI, override with ENV variable PLATFORM
+# Or just manually set it here:
+#PLATFORM=OMEGA2
+#PLATFORM=PI
+
+ifndef PLATFORM
+PLATFORM=PI
+endif
 
 #extra paths
 FLASH=$(SRC_MAIN)/flash
