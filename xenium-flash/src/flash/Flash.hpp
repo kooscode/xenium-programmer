@@ -20,10 +20,17 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #ifndef XK_FLASH_
 #define XK_FLASH_
 
+#include <memory>
 #include <stdint.h>
 #include <iostream>
 
-#include "BitBus.hpp"
+#ifdef OMEGA2
+    #include "BitBusOmega2.hpp"
+    #define PLATFORMBUS BitBusOmega2
+#else
+    #include "BitBusPI.hpp"
+    #define PLATFORMBUS BitBusPI
+#endif
 
 namespace XK
 {
@@ -31,7 +38,7 @@ namespace XK
     {
         public:
             Flash();
-            std::string GetPiVersion();
+            std::string GetHardwareString();
             uint8_t GetManufacturerID();
             uint8_t GetDeviceID();
             void    ChipReset();
@@ -40,7 +47,7 @@ namespace XK
             void    Write(const uint32_t& address, const char& data);            
             
         private:
-            BitBus  bitbus_;
+            std::unique_ptr<BitBus>  bitbus_;
             BusMode busmode_;
             GPIOMode gpiomode_;
             bool    platform_delay_;

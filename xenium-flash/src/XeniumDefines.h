@@ -17,23 +17,44 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// JTAG Pins
-#define XENIUM_TMS 4
-#define XENIUM_TCK 17
-#define XENIUM_TDI 22
-#define XENIUM_TDO 27
-
-// BitBus pins connected to LPC Header
+// BITBUS TO XENIUM PIN MAP
+// ------------------------
 // BITBUS D0 => LPC LAD0
-#define BITBUS_D0 16
 // BITBUS D1 => LPC LAD1
-#define BITBUS_D1 21
 // BITBUS D2 => LPC LAD2
-#define BITBUS_D2 18
 // BITBUS D3 => LPC LAD3
-#define BITBUS_D3 20
 // BITBUS CLK => LPC LCLK
-#define BITBUS_CLK 24
 // BITBUS DIR => LPC RST
-#define BITBUS_DIR 23
+
+// default is PI build
+#ifndef OMEGA2
+    // JTAG Pins
+    #define XENIUM_TMS 4
+    #define XENIUM_TCK 17
+    #define XENIUM_TDI 22
+    #define XENIUM_TDO 27
+
+    // BitBus pins connected to LPC Header
+    #define BITBUS_D0 16
+    #define BITBUS_D1 21
+    #define BITBUS_D2 18
+    #define BITBUS_D3 20
+    #define BITBUS_CLK 24
+    #define BITBUS_DIR 23
+
+#else
+    // JTAG Pins
+    #define XENIUM_TMS 11
+    #define XENIUM_TCK 3
+    #define XENIUM_TDI 2
+    #define XENIUM_TDO 17
+
+    // BitBus pins connected to LPC Header
+    #define BITBUS_D0 16
+    #define BITBUS_D1 21
+    #define BITBUS_D2 18
+    #define BITBUS_D3 20
+    #define BITBUS_CLK 24
+    #define BITBUS_DIR 23
+#endif
 
