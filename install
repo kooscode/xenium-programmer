@@ -11,13 +11,11 @@ else
 fi
 
 if [ $PLATFORM = "OMEGA2" ]; then
-    echo -e '----------------------------------------------'
-    echo -e '\n       !! ONION OMEGA2+ DETECTED !!\n'
-    echo -e '----------------------------------------------'
+    echo -e '       !! ONION OMEGA2+ DETECTED !!'
 else
     # general PI pre-reqs
     echo -e '--------------------------------------------'
-    echo -e '\n  INSTALLING PI UPDATES AND REQUIREMENTS\n'
+    echo -e '\n INSTALLING PI UPDATES AND REQUIREMENTS\n'
     echo -e '--------------------------------------------'
     sudo apt -y update
     sudo apt -y install build-essential wiringpi git cmake
@@ -27,7 +25,7 @@ fi
 echo -e '------------------------------------------'
 echo -e '\n BUILDING XENIUM JTAG AND FLASH TOOLS\n'
 echo -e '------------------------------------------'
-if which g++ | grep -q "xg++"; then
+if which g++ | grep -q "g++"; then
     cd xenium-flash
     make
     cd ..
