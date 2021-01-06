@@ -1,4 +1,4 @@
-/* WiringPI implementation of XC3SPROG IOBase
+/* Onion Omega 2 implementation of XC3SPROG IOBase
 
 Copyright (C) 2019-2020 Koos du Preez (kdupreez@hotmail.com)
 
@@ -15,10 +15,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-Changes:
-Koos du Preez [kdupreez@hotmail.com] Jan 1 2019 
-    Prettified and made more readable.
 */
 
 #include "IOWiringPi.h"
