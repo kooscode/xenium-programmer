@@ -41,7 +41,7 @@ fi
 echo -e '---------------------------------------------'
 echo -e 'PROGRAMMING XILINX CPLD: OPEN XENIUM FIRMWARE'
 echo -e '---------------------------------------------'
-xenium-jtag $XENIUM_JED
+xenium-flash/bin/xenium-jtag $XENIUM_JED
 if [ $? -ne 0 ]
 then
   echo "ERROR Programming the Xilinx CPLD: " $XENIUM_JED
