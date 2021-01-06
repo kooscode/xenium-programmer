@@ -42,16 +42,12 @@ class IOBase
   unsigned char tms_buf[CHUNK_SIZE];
   unsigned int tms_len; /* in Bits*/
 
- protected:
-  IOBase();
  public:
   virtual ~IOBase() {}
 
- public:
   virtual void flush() {}
   virtual void Usleep(unsigned int usec);
 
- public:
   void setVerbose(bool v) { verbose = v; }
   void shiftTDITDO(const unsigned char *tdi, unsigned char *tdo, int length, bool last=true);
   void shiftTDI(const unsigned char *tdi, int length, bool last=true);
@@ -61,6 +57,8 @@ class IOBase
   void flush_tms(int force);
 
  protected:
+  IOBase();
+
   virtual void txrx_block(const unsigned char *tdi, unsigned char *tdo, int length, bool last)=0;
   virtual void tx_tms(unsigned char *pat, int length, int force)=0;
   virtual void settype(int subtype) {}

@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #define XK_BITBUS_
 
 #include <stdint.h>
+#include <string>
 
 namespace XK
 {
@@ -36,19 +37,23 @@ namespace XK
         GPIO_OUT = 1
     };
 
-    class BitBus final 
+    class BitBus 
     {
         public:
             BitBus();
             void SetPlatformDelay(bool delay_enabled);
-            void SetGPIOMode(GPIOMode gpiomode);
-            void Clock();
-            void SetBusMode(BusMode busmode);
-            void WriteByte(const uint8_t& data);
-            uint8_t ReadByte();
-        private:
+
+            virtual void DelayMicroseconds(uint64_t usec) = 0;
+            virtual std::string GetHardwareString() = 0;
+            virtual void SetGPIOMode(GPIOMode gpiomode) = 0;
+            virtual void Clock() = 0;;
+            virtual void SetBusMode(BusMode busmode) = 0;
+            virtual void WriteByte(const uint8_t& data) = 0;
+            virtual uint8_t ReadByte() = 0;
+
+        protected:
             bool platform_delay_;
-            void InitGPIO();
+            virtual void InitGPIO() = 0;
     };
 }
 

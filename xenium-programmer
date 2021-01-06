@@ -17,7 +17,7 @@ fi
 echo -e '--------------------------------------'
 echo -e 'PROGRAMMING XILINX CPLD: BITBUS BRIDGE'
 echo -e '--------------------------------------'
-xenium-jtag $FLASH_JED
+xenium-flash/bin/xenium-jtag $FLASH_JED
 if [ $? -ne 0 ]
 then
   echo "ERROR Programming the Xilinx CPLD: " $FLASH_JED
@@ -41,7 +41,7 @@ fi
 echo -e '---------------------------------------------'
 echo -e 'PROGRAMMING XILINX CPLD: OPEN XENIUM FIRMWARE'
 echo -e '---------------------------------------------'
-xenium-jtag $XENIUM_JED
+xenium-flash/bin/xenium-jtag $XENIUM_JED
 if [ $? -ne 0 ]
 then
   echo "ERROR Programming the Xilinx CPLD: " $XENIUM_JED

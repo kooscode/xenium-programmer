@@ -25,8 +25,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include <cstring>
 #include <iomanip>
 
-#include "wiringPi.h"
-
 #include "Flash.hpp"
 
 #define FLASH_SIZE 0x200000
@@ -48,8 +46,8 @@ int main(int argc, char** argv)
     }
 
     // need pi hardware revision for timing control..
-    std::string pi_version = flash.GetPiVersion();
-    std::cout << "Checking PI Hardware: " << pi_version << std::endl;
+    std::string pi_version = flash.GetHardwareString();
+    std::cout << "Checking Hardware: " << pi_version << std::endl;
 
 // ********************  LOADING FLASH FILE ***************
     std::string infile = argv[1];
@@ -83,11 +81,11 @@ int main(int argc, char** argv)
 
 
 // ******************** CHECK XENIUM HARDWARE ***************
+    std::cout << "Detecting Xenium Flash: " << std::flush;
     flash.ChipReset();
     std::this_thread::sleep_for (std::chrono::milliseconds(500));
     uint8_t manufacturer = flash.GetManufacturerID();
     uint8_t deviceid = flash.GetDeviceID();
-    std::cout << "Detecting Xenium Flash: ";
 
     // OpenXenium CPLD brings back 0x55 and 0x5F.. very convenient..
     if (manufacturer == 0x55 && deviceid == 0x5F)
@@ -177,7 +175,7 @@ int main(int argc, char** argv)
     {
         //read byte from flash
         uint inbyte = flash.Read(i);
-        if (flash_buffer[i] == inbyte)
+        if (flash_buffer[i] == (char)inbyte)
         {
             flash_buffer[i] = inbyte;
         }

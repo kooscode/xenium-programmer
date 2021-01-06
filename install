@@ -2,27 +2,43 @@
 
 echo -e '* XENIUM PROGRAMMER TOOLCHAIN INSTALLATION *\n'
 
-# general pre-reqs
-echo -e '-------------------------------------------'
-echo -e '\n  INSTALLING UPDATES AND REQUIREMENTS\n'
-echo -e '-------------------------------------------'
-sudo apt -y update
-sudo apt -y install build-essential wiringpi git cmake
+# Set platform
+DEV_FILE=/sys/firmware/devicetree/base/model
+if grep -q "Onion Omega2+" "$DEV_FILE"; then
+    PLATFORM=OMEGA2
+else
+    PLATFORM=PI
+fi
+
+if [ $PLATFORM = "OMEGA2" ]; then
+    echo -e '       !! ONION OMEGA2+ DETECTED !!\n'
+else
+    # general PI pre-reqs
+    echo -e '--------------------------------------------'
+    echo -e '\n INSTALLING PI UPDATES AND REQUIREMENTS\n'
+    echo -e '--------------------------------------------'
+    sudo apt -y update
+    sudo apt -y install build-essential wiringpi git cmake
+fi
 
 # make and install xenium-flash to bin
-echo -e '----------------------------------------------------------'
-echo -e '\n BUILDING AND INSTALLING XENIUM JTAG AND FLASH TOOLS\n'
-echo -e '----------------------------------------------------------'
-cd xenium-flash
-make
-sudo cp bin/xenium-jtag /usr/local/bin
-sudo cp bin/xenium-flash /usr/local/bin
-cd ..
+echo -e '------------------------------------------'
+echo -e '\n BUILDING XENIUM JTAG AND FLASH TOOLS\n'
+echo -e '------------------------------------------'
+if which g++ | grep -q "g++"; then
+    cd xenium-flash
+    make
+    cd ..
 
-chmod +x xenium-programmer
+    # ensure script is executable
+    chmod +x xenium-programmer
 
-echo -e '\n** INSTALL COMPLETE **\n'
+    echo -e '\n** INSTALL COMPLETE **\n'
 
-echo -e '\nProgram your Xenium by running:\n\t ./xenium-programmer\n'
+    echo -e '\nProgram your Xenium by running:\n\t ./xenium-programmer\n'
+else
+    echo -e '\n*** ERROR: No C++ Compiler found!!!!\n'
+fi
+
 
 

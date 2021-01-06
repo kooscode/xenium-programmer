@@ -19,43 +19,29 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include "Flash.hpp"
 
-#include <fstream>
-
-#include "wiringPi.h"
-
 namespace XK
 {
     Flash::Flash() :
-        bitbus_(BitBus())
+        bitbus_(std::make_unique<PLATFORMBUS>())
     {        
         //check if delay needs to be injected for non Pi-Zero models..
-        platform_delay_ = GetPiVersion().find("Zero") == std::string::npos;
-        bitbus_.SetPlatformDelay(platform_delay_);
+        platform_delay_ = bitbus_->GetHardwareString().find("Zero") == std::string::npos;
+        bitbus_->SetPlatformDelay(platform_delay_);
 
         // Innitialize with GPIO for READ
-        bitbus_.SetGPIOMode(GPIO_IN);
+        bitbus_->SetGPIOMode(GPIO_IN);
         gpiomode_ = GPIO_IN;
 
         // toggle modes to reset bus to READ
-        bitbus_. SetBusMode(BITBUS_WRITE);
-        bitbus_. SetBusMode(BITBUS_READ);
+        bitbus_-> SetBusMode(BITBUS_WRITE);
+        bitbus_-> SetBusMode(BITBUS_READ);
         busmode_ = BITBUS_READ;
 
     }
 
-    std::string Flash::GetPiVersion()
+    std::string Flash::GetHardwareString()
     {
-        std::ifstream vfile("/sys/firmware/devicetree/base/model");
-        std::string vstr;
-
-        if (vfile.is_open())
-            std::getline(vfile, vstr);
-        else
-            vstr = "UNKNOWN";
-
-        vfile.close();
-
-        return vstr;
+        return bitbus_->GetHardwareString();
     }
 
     uint8_t Flash::GetManufacturerID()
@@ -93,8 +79,8 @@ namespace XK
         WriteByte(0x000, 0xF0);
 
         //force toggle mode lines to reset bus 
-        bitbus_. SetBusMode(BITBUS_READ);
-        bitbus_. SetBusMode(BITBUS_WRITE);
+        bitbus_-> SetBusMode(BITBUS_READ);
+        bitbus_-> SetBusMode(BITBUS_WRITE);
     }
 
     void Flash::ChipErase()
@@ -133,7 +119,7 @@ namespace XK
         if (busmode_ != busmode)
         {
             busmode_ = busmode;
-            bitbus_.SetBusMode(busmode_);
+            bitbus_->SetBusMode(busmode_);
         }
     }
 
@@ -142,7 +128,7 @@ namespace XK
         if (gpiomode_ != gpiomode)
         {
             gpiomode_ = gpiomode;
-            bitbus_.SetGPIOMode(gpiomode_);
+            bitbus_->SetGPIOMode(gpiomode_);
         }
     }
 
@@ -153,19 +139,19 @@ namespace XK
 
         // transmit 24-bits of address (only 21-bits are used)
         SetGPIOMode(GPIO_OUT);
-        bitbus_.WriteByte(addr_byte[0]);
-        bitbus_.WriteByte(addr_byte[1]);
-        bitbus_.WriteByte(addr_byte[2]);
+        bitbus_->WriteByte(addr_byte[0]);
+        bitbus_->WriteByte(addr_byte[1]);
+        bitbus_->WriteByte(addr_byte[2]);
 
         // flash: we=1, oe=0;
-        bitbus_.Clock();
+        bitbus_->Clock();
 
         // read 8-bit data
         SetGPIOMode(GPIO_IN);
-        bb_data = bitbus_.ReadByte();
+        bb_data = bitbus_->ReadByte();
 
         // flash: we=1, oe=1
-        bitbus_.Clock();
+        bitbus_->Clock();
 
         return bb_data;
     }
@@ -176,21 +162,21 @@ namespace XK
         
         // transmit 24-bits of address (only 21-bits are used)
         SetGPIOMode(GPIO_OUT);
-        bitbus_.WriteByte(addr_byte[0]);
-        bitbus_.WriteByte(addr_byte[1]);
-        bitbus_.WriteByte(addr_byte[2]);
+        bitbus_->WriteByte(addr_byte[0]);
+        bitbus_->WriteByte(addr_byte[1]);
+        bitbus_->WriteByte(addr_byte[2]);
 
         // flash: we=0, oe=1;
-        bitbus_.Clock();
+        bitbus_->Clock();
 
         // transmit 8 bit data
-        bitbus_.WriteByte(data);
+        bitbus_->WriteByte(data);
 
         // flash: we=1, oe=1;
-        bitbus_.Clock();
+        bitbus_->Clock();
 
         // small delay between writes makes it much more stable
-        delayMicroseconds(3);
+        bitbus_->DelayMicroseconds(3);
     }
 
 }

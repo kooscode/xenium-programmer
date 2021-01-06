@@ -1,4 +1,4 @@
-/* WiringPI implementation of for Xenium CPLD
+/* PI and Omega2/+ IOBase specialized for Xenium's CPLD
 
 Copyright (C) 2019-2020 Koos du Preez (kdupreez@hotmail.com)
 
@@ -20,15 +20,22 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #ifndef __IO_XENIUM__
 #define __IO_XENIUM__
 
-#include "IOWiringPi.h"
-
 #include "XeniumDefines.h"
 
-class IOXenium : public IOWiringPi
+#ifdef OMEGA2
+    #include "IOOmega2.h"
+    #define PLATFORMIO IOOmega2
+#else
+    #include "IOWiringPi.h"
+    #define PLATFORMIO IOWiringPi
+
+#endif
+
+class IOXenium : public PLATFORMIO
 {
     public:
     IOXenium() 
-        :IOWiringPi(XENIUM_TMS, XENIUM_TCK, XENIUM_TDI, XENIUM_TDO) {}
+        :PLATFORMIO(XENIUM_TMS, XENIUM_TCK, XENIUM_TDI, XENIUM_TDO) {}
 };
 
 #endif
