@@ -14,7 +14,7 @@ CXX=g++
 #G++ options
 # To Make Debug Build set: -g
 # To Debug with GDB run: gdb -ex=r --args APP ARG1 ARG2
-CFLAGS=-Wall -ansi
+CFLAGS=-g -Wall -ansi
 CPP_STD=c++17
 
 #include paths
@@ -75,7 +75,7 @@ D4=
 #expand all options
 INC=$(I1) $(I2) $(I3) $(I4)
 INCLUDES=$(foreach d, $(INC), -I$d)
-SOURCES=$(S1) $(S2) $(S3) $(S4) $(S5) $(S6) $(S7) $(S8) $(S9) $(10)
+SOURCES=$(S1) $(S2) $(S3) $(S4) $(S5) $(S6) $(S7) $(S8) $(S9) $(S10)
 LIB_PATH=$(LP1) $(LP2) $(LP3) $(LP4)
 LIB_PATHS=$(foreach d, $(LIB_PATH), -L$d)
 LIB=$(L1) $(L2) $(L3) $(L4) $(L5)
