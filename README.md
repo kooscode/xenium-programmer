@@ -39,6 +39,7 @@ https://Onion.io/store/omega2p
 ## HOOKING UP THE HARDWARE
 
 - The JTAG and FLASH pins are configurable by editing the `XeniumDefines.h` file 
+- If you edited the `XeniumDefines.h` file, make sure to run `./install` again
 
 ## [ RASPBERRY PI ]
 ![bitbus-pinout](images/bitbus-pinout.png)  ![jtag-pinout](images/jtag-pinout.png)  
