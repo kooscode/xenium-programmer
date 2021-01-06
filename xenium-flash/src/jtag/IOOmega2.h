@@ -1,4 +1,4 @@
-/* Onion Omega 2 implementation of XC3SPROG IOBase
+/* OmegaS2+ implementation of XC3SPROG IOBase
 
 Copyright (C) 2019-2020 Koos du Preez (kdupreez@hotmail.com)
 
