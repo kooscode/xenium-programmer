@@ -11,7 +11,7 @@ else
 fi
 
 if [ $PLATFORM = "OMEGA2" ]; then
-    echo -e '       !! ONION OMEGA2+ DETECTED !!'
+    echo -e '       !! ONION OMEGA2+ DETECTED !!\n'
 else
     # general PI pre-reqs
     echo -e '--------------------------------------------'
