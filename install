@@ -5,9 +5,9 @@ echo -e '* XENIUM PROGRAMMER TOOLCHAIN INSTALLATION *\n'
 # Set platform
 DEV_FILE=/sys/firmware/devicetree/base/model
 if grep -q "Onion Omega2+" "$DEV_FILE"; then
-    PLATFORM=OMEGA2
+    export PLATFORM=OMEGA2
 else
-    PLATFORM=PI
+    export PLATFORM=PI
 fi
 
 if [ $PLATFORM = "OMEGA2" ]; then
