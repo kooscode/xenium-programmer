@@ -63,7 +63,7 @@ namespace XK
     void  BitBusOmega2::Clock()
     {
 
-        omega_.digitalWrite(BITBUS_CLK, HIGH);
+        omega_.digitalWrite(BITBUS_CLK, OMEGA_HIGH);
 //         if (platform_delay_)
 //         {   
 //             //ugly way to delay for 3B+.. cause normal thread_this:wait_until aint working!
@@ -76,7 +76,7 @@ namespace XK
 //             omega_.digitalWrite(BITBUS_CLK, HIGH);
 //             omega_.digitalWrite(BITBUS_CLK, LOW);
 //         }         
-        omega_.digitalWrite(BITBUS_CLK, LOW);
+        omega_.digitalWrite(BITBUS_CLK, OMEGA_LOW);
     }
 
     void BitBusOmega2::SetBusMode(BusMode busmode)
@@ -126,8 +126,8 @@ namespace XK
     void  BitBusOmega2::InitGPIO()
     {
         //setup BitBusOmega2 control pins
-        omega_.pinMode(BITBUS_CLK, (int)GPIO_OUT);
-        omega_.pinMode(BITBUS_DIR, (int)GPIO_OUT);
+        omega_.pinMode(BITBUS_CLK, OMEGA_GPIO_OUT);
+        omega_.pinMode(BITBUS_DIR, OMEGA_GPIO_OUT);
     }
 
 }

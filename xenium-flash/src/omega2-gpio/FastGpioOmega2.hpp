@@ -68,23 +68,23 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //GPIO_DCLR_2 10000648(GPIO64-95)
 #define REGISTER_DCLR2_OFFSET		402
 
-#define GPIO_OUT 1
-#define GPIO_IN 0
+#define OMEGA_GPIO_OUT 1
+#define OMEGA_GPIO_IN 0
 
-#define HIGH 1
-#define LOW 0
+#define OMEGA_HIGH 1
+#define OMEGA_LOW 0
 
-#define GPIO_0  0
-#define GPIO_1  1
-#define GPIO_2  2
-#define GPIO_3  3
-#define GPIO_6  6
-#define GPIO_11 11
-#define GPIO_15 15
-#define GPIO_16 16
-#define GPIO_17 17
-#define GPIO_18 18
-#define GPIO_19 19
+#define OMEGA_GPIO_0  0
+#define OMEGA_GPIO_1  1
+#define OMEGA_GPIO_2  2
+#define OMEGA_GPIO_3  3
+#define OMEGA_GPIO_6  6
+#define OMEGA_GPIO_11 11
+#define OMEGA_GPIO_15 15
+#define OMEGA_GPIO_16 16
+#define OMEGA_GPIO_17 17
+#define OMEGA_GPIO_18 18
+#define OMEGA_GPIO_19 19
 
 class FastGpioOmega2 : public Module 
 {

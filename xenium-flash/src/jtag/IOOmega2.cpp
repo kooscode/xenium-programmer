@@ -28,10 +28,10 @@ IOOmega2::IOOmega2(int tms, int tck, int tdi, int tdo)
  : TMSPin(tms), TCKPin(tck), TDIPin(tdi), TDOPin(tdo)
 {
 
-    omega_.pinMode(TDIPin, GPIO_OUT);
-    omega_.pinMode(TMSPin, GPIO_OUT);
-    omega_.pinMode(TCKPin, GPIO_OUT);
-    omega_.pinMode(TDOPin, GPIO_IN);
+    omega_.pinMode(TDIPin, OMEGA_GPIO_OUT);
+    omega_.pinMode(TMSPin, OMEGA_GPIO_OUT);
+    omega_.pinMode(TCKPin, OMEGA_GPIO_OUT);
+    omega_.pinMode(TDOPin, OMEGA_GPIO_IN);
 }
 
 IOOmega2::~IOOmega2()
@@ -78,7 +78,7 @@ void IOOmega2::txrx_block(const unsigned char *tdi, unsigned char *tdo, int leng
   if(tdo)
       tdo[j]=tdo_byte;
 
-   omega_.digitalWrite(TCKPin, LOW);
+   omega_.digitalWrite(TCKPin, OMEGA_LOW);
 
   return;
 }
@@ -97,24 +97,24 @@ void IOOmega2::tx_tms(unsigned char *pat, int length, int force)
         tms = tms >> 1;
     }
     
-    omega_.digitalWrite(TCKPin, LOW);
+    omega_.digitalWrite(TCKPin, OMEGA_LOW);
 }
 
 void IOOmega2::tx(bool tms, bool tdi)
 {
-    omega_.digitalWrite(TCKPin, LOW);
+    omega_.digitalWrite(TCKPin, OMEGA_LOW);
 
     if(tdi)
-        omega_.digitalWrite(TDIPin, HIGH);
+        omega_.digitalWrite(TDIPin, OMEGA_HIGH);
     else
-        omega_.digitalWrite(TDIPin, LOW);
+        omega_.digitalWrite(TDIPin, OMEGA_LOW);
 
     if(tms)
-        omega_.digitalWrite(TMSPin, HIGH);
+        omega_.digitalWrite(TMSPin, OMEGA_HIGH);
     else
-        omega_.digitalWrite(TMSPin, LOW);
+        omega_.digitalWrite(TMSPin, OMEGA_LOW);
 
-    omega_.digitalWrite(TCKPin, HIGH);
+    omega_.digitalWrite(TCKPin, OMEGA_HIGH);
 }
 
 
