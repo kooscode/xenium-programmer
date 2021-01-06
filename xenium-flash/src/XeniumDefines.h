@@ -50,11 +50,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
     #define XENIUM_TDO 17
 
     // BitBus pins connected to LPC Header
-    #define BITBUS_D0 16
-    #define BITBUS_D1 21
-    #define BITBUS_D2 18
-    #define BITBUS_D3 20
-    #define BITBUS_CLK 24
-    #define BITBUS_DIR 23
+    #define BITBUS_D0 1
+    #define BITBUS_D1 15
+    #define BITBUS_D2 16
+    #define BITBUS_D3 18
+    #define BITBUS_CLK 0
+    #define BITBUS_DIR 19
 #endif
 

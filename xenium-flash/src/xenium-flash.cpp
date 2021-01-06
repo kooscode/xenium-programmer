@@ -175,7 +175,7 @@ int main(int argc, char** argv)
     {
         //read byte from flash
         uint inbyte = flash.Read(i);
-        if (flash_buffer[i] == inbyte)
+        if (flash_buffer[i] == (char)inbyte)
         {
             flash_buffer[i] = inbyte;
         }
