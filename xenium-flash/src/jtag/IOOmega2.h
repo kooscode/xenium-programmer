@@ -1,4 +1,4 @@
-/* Custom 4-bit "BitBus"
+/* OmegaS2+ implementation of XC3SPROG IOBase
 
 Copyright (C) 2019-2020 Koos du Preez (kdupreez@hotmail.com)
 
@@ -17,21 +17,32 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include "BitBus.hpp"
+#ifndef __IO_OMEGA_2__
+#define __IO_OMEGA_2__
 
-#include <thread>
-#include <chrono>
+#include "IOBase.h"
+#include "FastGpioOmega2.hpp"
 
-#include "XeniumDefines.h"
-
-namespace XK
+class IOOmega2 : public IOBase
 {
-    BitBus::BitBus()
-    { }
+ public:
+  IOOmega2(int tms, int tck, int tdi, int tdo);
+  virtual ~IOOmega2();
 
-    void BitBus::SetPlatformDelay(bool delay_enabled)
-    {
-        platform_delay_ = delay_enabled;
-    }
-}
+ protected:
+  void tx(bool tms, bool tdi);
+  bool txrx(bool tms, bool tdi);
 
+  void txrx_block(const unsigned char *tdi, unsigned char *tdo, int length, bool last);
+  void tx_tms(unsigned char *pat, int length, int force);
+
+  int TMSPin;
+  int TCKPin;
+  int TDIPin;
+  int TDOPin;
+ 
+  FastGpioOmega2 omega_;
+
+};
+
+#endif

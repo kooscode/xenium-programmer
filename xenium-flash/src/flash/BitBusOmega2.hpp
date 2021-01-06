@@ -1,4 +1,4 @@
-/* Custom 4-bit "BitBus"
+/* Onion Omega2+ implementation of Custom 4-bit "BitBus"
 
 Copyright (C) 2019-2020 Koos du Preez (kdupreez@hotmail.com)
 
@@ -17,21 +17,32 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+#ifndef XK_BITBUS_OMEGA2_
+#define XK_BITBUS_OMEGA2_
+
+#include <stdint.h>
+
 #include "BitBus.hpp"
-
-#include <thread>
-#include <chrono>
-
-#include "XeniumDefines.h"
+#include "FastGpioOmega2.hpp"
 
 namespace XK
 {
-    BitBus::BitBus()
-    { }
-
-    void BitBus::SetPlatformDelay(bool delay_enabled)
+    class BitBusOmega2 : public BitBus 
     {
-        platform_delay_ = delay_enabled;
-    }
+        public:
+            BitBusOmega2();
+            void DelayMicroseconds(uint64_t usec);
+            std::string GetHardwareString();
+            void SetGPIOMode(GPIOMode gpiomode);
+            void Clock();
+            void SetBusMode(BusMode busmode);
+            void WriteByte(const uint8_t& data);
+            uint8_t ReadByte();
+
+        private:
+            void InitGPIO();
+            FastGpioOmega2 omega_;
+    };
 }
 
+#endif

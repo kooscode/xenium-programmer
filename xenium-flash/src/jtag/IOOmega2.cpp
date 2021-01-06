@@ -1,4 +1,4 @@
-/* Onion Omega 2 implementation of XC3SPROG IOBase
+/* OmegaS2+ implementation of XC3SPROG IOBase
 
 Copyright (C) 2019-2020 Koos du Preez (kdupreez@hotmail.com)
 
@@ -15,26 +15,30 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+Changes:
+Koos du Preez [kdupreez@hotmail.com] Jan 1 2019 
+    Prettified and made more readable.
 */
 
-#include "IOWiringPi.h"
-#include <wiringPi.h>
+#include "IOOmega2.h"
 
-IOWiringPi::IOWiringPi(int tms, int tck, int tdi, int tdo)
+
+IOOmega2::IOOmega2(int tms, int tck, int tdi, int tdo)
  : TMSPin(tms), TCKPin(tck), TDIPin(tdi), TDOPin(tdo)
 {
-    wiringPiSetupGpio(); 
-    pinMode(TDIPin, OUTPUT);
-    pinMode(TMSPin, OUTPUT);
-    pinMode(TCKPin, OUTPUT);
-    pinMode(TDOPin, INPUT);
+
+    omega_.pinMode(TDIPin, OMEGA_GPIO_OUT);
+    omega_.pinMode(TMSPin, OMEGA_GPIO_OUT);
+    omega_.pinMode(TCKPin, OMEGA_GPIO_OUT);
+    omega_.pinMode(TDOPin, OMEGA_GPIO_IN);
 }
 
-IOWiringPi::~IOWiringPi()
+IOOmega2::~IOOmega2()
 {
 }
 
-void IOWiringPi::txrx_block(const unsigned char *tdi, unsigned char *tdo, int length, bool last)
+void IOOmega2::txrx_block(const unsigned char *tdi, unsigned char *tdo, int length, bool last)
 {
   int i=0;
   int j=0;
@@ -74,12 +78,12 @@ void IOWiringPi::txrx_block(const unsigned char *tdi, unsigned char *tdo, int le
   if(tdo)
       tdo[j]=tdo_byte;
 
-  digitalWrite(TCKPin, LOW);
+   omega_.digitalWrite(TCKPin, OMEGA_LOW);
 
   return;
 }
 
-void IOWiringPi::tx_tms(unsigned char *pat, int length, int force)
+void IOOmega2::tx_tms(unsigned char *pat, int length, int force)
 {
     int i;
     unsigned char tms;
@@ -93,32 +97,31 @@ void IOWiringPi::tx_tms(unsigned char *pat, int length, int force)
         tms = tms >> 1;
     }
     
-   digitalWrite(TCKPin, LOW);
+    omega_.digitalWrite(TCKPin, OMEGA_LOW);
 }
 
-void IOWiringPi::tx(bool tms, bool tdi)
+void IOOmega2::tx(bool tms, bool tdi)
 {
-    digitalWrite(TCKPin, LOW);
+    omega_.digitalWrite(TCKPin, OMEGA_LOW);
 
     if(tdi)
-        digitalWrite(TDIPin, HIGH);
+        omega_.digitalWrite(TDIPin, OMEGA_HIGH);
     else
-        digitalWrite(TDIPin, LOW);
+        omega_.digitalWrite(TDIPin, OMEGA_LOW);
 
     if(tms)
-        digitalWrite(TMSPin, HIGH);
+        omega_.digitalWrite(TMSPin, OMEGA_HIGH);
     else
-        digitalWrite(TMSPin, LOW);
+        omega_.digitalWrite(TMSPin, OMEGA_LOW);
 
-    digitalWrite(TCKPin, HIGH);
+    omega_.digitalWrite(TCKPin, OMEGA_HIGH);
 }
 
 
-bool IOWiringPi::txrx(bool tms, bool tdi)
+bool IOOmega2::txrx(bool tms, bool tdi)
 {
   tx(tms, tdi);
-    
-  return digitalRead(TDOPin);  
+  return omega_.digitalRead(TDOPin);
 }
 
 
