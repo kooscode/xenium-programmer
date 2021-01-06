@@ -15,3 +15,4 @@ This is the main app that uploads XeniumOS images into the OpenXenium Flash memo
 
 # Building
 - just run `make` or run the `install` script in root of this repo to make and install
+
