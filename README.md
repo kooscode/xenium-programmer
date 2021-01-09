@@ -54,8 +54,18 @@ https://Onion.io/store/omega2p
 
 
 -------------
+## PC BOARD
+
+Huge thanks to James Bolding for the Eagle PCB hardware design. He made a kick-ass Schematic and PCB that you can make for the Raspberry PI Zero based programmer!  
+
+- You can use the FREE Eagle PCB to load this up or just use the gerber files to have the PCB made at OSH Park!
+
+![RPI PXB](hardware/RaspberryPIZero/images/rpi-top-scaled.png)
+
+-------------
 ## CREDITS
 
 - Koos du Preez - Creator (kdupreez@hotmail.com - Comments, improvements, critique, etc. is welcome!)
+- James Bolding - Kick ass awesome hardware design and PCB!
 - Ryzee119 -  OpenXenium Firmware and hardware and all round awesomeness!
 - XC3SPROG - Not sure who to thank here, but the source code was pivotal in making this work!
