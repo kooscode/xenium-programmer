@@ -19,17 +19,20 @@ https://Onion.io/store/omega2p
 -------------
 ## INSTALLING THE XENIUM PROGRAMMER
 
+- Connect to the PI or Omega via SSH or Serial terminal 
 - Clone this repo by running: `git clone https://github.com/kooscode/xenium-programmer.git`
 - Then run: `./install`
 
 ## UPDATING XENIUM PROGRAMMER
 
+- Connect to the PI or Omega via SSH or Serial terminal 
 - Pull the latest code with: `git pull`
 - Then run: `./install` 
 
 -------------
 ## PROGRAMMING A XENIUM CPLD AND FLASH MEMORY
 
+- Connect to the PI or Omega via SSH or Serial terminal 
 - You can program XeniumOS and OpenXenium Firmware in one single step.
 - Run: `./xenium-programmer`  
 
