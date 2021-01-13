@@ -19,6 +19,7 @@ https://Onion.io/store/omega2p
 -------------
 ## INSTALLING THE XENIUM PROGRAMMER
 
+- Connect to the PI or Omega via SSH or Serial terminal 
 - Clone this repo by running: `git clone https://github.com/kooscode/xenium-programmer.git`
 - Then run: `./install`
 
