@@ -44,26 +44,27 @@ https://Onion.io/store/omega2p
 - The JTAG and FLASH pins are configurable by editing the `XeniumDefines.h` file 
 - If you edited the `XeniumDefines.h` file, make sure to run `./install` again
 
+--------------
 ## [ RASPBERRY PI ]
-![bitbus-pinout](images/bitbus-pinout.png)  ![jtag-pinout](images/jtag-pinout.png)  
 
-![jtag-pinout](images/connections.png)
+![jtag-pinout](images/connections-pi.png)
 
-## [ ONION OMEGA2+ ]
+![bitbus-pinout](images/pinout-pi.png)
 
-###  [ IMAGES COMING SOON ]
- 
- The Onion Omega2+ Pinouts are in the `XeniumDefines.h` file.. I'll add images soon..
-
-
--------------
-## PC BOARD
+### PC BOARD
 
 Huge thanks to James Bolding for the Eagle PCB hardware design. He made a kick-ass Schematic and PCB that you can make for the Raspberry PI Zero based programmer!  
 
 - You can use the FREE Eagle PCB to load this up or just use the gerber files to have the PCB made at OSH Park!
 
 ![RPI PXB](hardware/RaspberryPIZero/images/rpi-top-scaled.png)
+
+--------------
+## [ ONION OMEGA2+ ]
+
+![jtag-pinout](images/connections-omega.png)
+
+![bitbus-pinout](images/pinout-omega.png)
 
 -------------
 ## CREDITS
