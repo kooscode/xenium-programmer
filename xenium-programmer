@@ -29,7 +29,7 @@ fi
 echo -e '-----------------------------'
 echo -e 'PROGRAMMING FLASH : XENIUM OS'
 echo -e '-----------------------------'
-xenium-flash/bin/xenium-flash $XENIUM_OS
+xenium-flash/bin/xenium-flash $XENIUM_OS $2
 if [ $? -ne 0 ]
 then
   echo "ERROR Loading XeniumOS into OpenXenium Flash memory!"

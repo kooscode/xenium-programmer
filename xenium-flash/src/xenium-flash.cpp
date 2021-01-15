@@ -46,7 +46,12 @@ int main(int argc, char** argv)
     }
 
     // if -y supplied after filename, then dont ask to erase/flash
-    bool force = ((argc > 2) && (argv[2] == "-y"));
+    bool force = false;
+    if(argc > 2)
+    {
+      std::string cmd2 = argv[2];
+      force = cmd2.compare("-y") == 0;
+    }
 
     // need pi hardware revision for timing control..
     std::string pi_version = flash.GetHardwareString();
