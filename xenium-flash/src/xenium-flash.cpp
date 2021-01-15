@@ -102,6 +102,12 @@ int main(int argc, char** argv)
                   << "the \"bitbus2flash.jed\" file first! **" << std::endl;
         return -1;
     }
+    else if (manufacturer == 0xFF && deviceid == 0xFF)
+    {
+        std::cout << "ERROR\n\n** XENIUM CPLD POSSIBLY BLANK - Please program " 
+                  << "the \"bitbus2flash.jed\" file first! **" << std::endl;
+        return -1;
+    }
     else if (manufacturer != 0x01 || deviceid != 0xC4)
     {
         std::cout << "ERROR\n\n** XENIUM FLASH DEVICE NOT FOUND - Manufacturer:" 
