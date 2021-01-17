@@ -45,6 +45,14 @@ int main(int argc, char** argv)
         return -1;
     }
 
+    // if -y supplied after filename, then dont ask to erase/flash
+    bool force = false;
+    if(argc > 2)
+    {
+      std::string cmd2 = argv[2];
+      force = cmd2.compare("-y") == 0;
+    }
+
     // need pi hardware revision for timing control..
     std::string pi_version = flash.GetHardwareString();
     std::cout << "Checking Hardware: " << pi_version << std::endl;
@@ -91,7 +99,13 @@ int main(int argc, char** argv)
     if (manufacturer == 0x55 && deviceid == 0x5F)
     {
         std::cout << "ERROR\n\n** XENIUM NOT IN BITBUS MODE - Please program " 
-                  << "the \"bitbus2flash.jed\" file first! **" << std::endl;
+                  << "the \"xeniumflash.jed\" file first! **" << std::endl;
+        return -1;
+    }
+    else if (manufacturer == 0xFF && deviceid == 0xFF)
+    {
+        std::cout << "ERROR\n\n** XENIUM CPLD POSSIBLY BLANK - Please program " 
+                  << "the \"xeniumflash.jed\" file first! **" << std::endl;
         return -1;
     }
     else if (manufacturer != 0x01 || deviceid != 0xC4)
@@ -107,15 +121,18 @@ int main(int argc, char** argv)
 
 // ********************* FLASH CHIP ERASE ***************** 
     flash.ChipReset();
-    std::string erase_ok;
-    std::cout << "This will ERASE your Xenium Flash, ARE YOU SURE? (Yes/No): " << std::flush;
-    std::getline (std::cin, erase_ok);
-    if ((erase_ok.find("Y") != 0) &&  (erase_ok.find("y") != 0))
+    if (!force)
     {
-        std::cout << "\n** XENIUM FLASH CANCELLED!! **\n" << std::endl;
-        return -1;
+      std::string erase_ok;
+      std::cout << "This will ERASE your Xenium Flash, ARE YOU SURE? (Yes/No): " << std::flush;
+      std::getline (std::cin, erase_ok);
+      if ((erase_ok.find("Y") != 0) &&  (erase_ok.find("y") != 0))
+      {
+          std::cout << "\n** XENIUM FLASH CANCELLED!! **\n" << std::endl;
+          return -1;
+      }
     }
-
+    
     flash.ChipErase();
     // wait for erase to complete..
     auto now = std::chrono::steady_clock::now();
