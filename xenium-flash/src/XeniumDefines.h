@@ -53,7 +53,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
     #define BITBUS_D1 21
     #define BITBUS_D2 18
     #define BITBUS_D3 20
-    #define BITBUS_CLK 24
+    #define BITBUS_CLK 8
     #define BITBUS_DIR 23
 #endif
 
