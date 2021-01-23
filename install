@@ -17,8 +17,8 @@ else
     echo -e '--------------------------------------------'
     echo -e '\n INSTALLING PI UPDATES AND REQUIREMENTS\n'
     echo -e '--------------------------------------------'
-    sudo apt -y update
-    sudo apt -y install build-essential wiringpi git cmake
+   # sudo apt -y update
+    #sudo apt -y install build-essential wiringpi git cmake
 fi
 
 # make and install xenium-flash to bin
