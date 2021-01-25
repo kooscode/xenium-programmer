@@ -1,7 +1,13 @@
 #!/bin/bash
-
-echo -e '\n OPEN XENIUM PROGRAMMER'
-echo -e '***************************\n'
+echo -e '▒██   ██▒▓█████  ███▄    █  ██▓ █    ██  ███▄ ▄███▓'
+echo -e '▒▒ █ █ ▒░▓█   ▀  ██ ▀█   █ ▓██▒ ██  ▓██▒▓██▒▀█▀ ██▒'
+echo -e '░░  █   ░▒███   ▓██  ▀█ ██▒▒██▒▓██  ▒██░▓██    ▓██░'
+echo -e ' ░ █ █ ▒ ▒▓█  ▄ ▓██▒  ▐▌██▒░██░▓▓█  ░██░▒██    ▒██ '
+echo -e '▒██▒ ▒██▒░▒████▒▒██░   ▓██░░██░▒▒█████▓ ▒██▒   ░██▒'
+echo -e '▒▒ ░ ░▓ ░░░ ▒░ ░░ ▒░   ▒ ▒ ░▓  ░▒▓▒ ▒ ▒ ░ ▒░   ░  ░'
+echo -e '░░   ░▒ ░ ░ ░  ░░ ░░   ░ ▒░ ▒ ░░░▒Programmer░     ░'
+echo -e ' ░    ░     ░      ░   ░ ░  ▒kooscode@github   ░   '
+echo -e ' ░    ░     ░  ░         ░  ░     ░            ░   '
 
 # Paths to default Firmware and XeniumOS files
 XENIUM_OS=xenium-bin/xenium_blue.bin

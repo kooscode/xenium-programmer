@@ -1,31 +1,56 @@
 #!/bin/bash
+set -e
+echo -e '\n▒██   ██▒▓█████  ███▄    █  ██▓ █    ██  ███▄ ▄███▓'
+echo -e '▒▒ █ █ ▒░▓█   ▀  ██ ▀█   █ ▓██▒ ██  ▓██▒▓██▒▀█▀ ██▒'
+echo -e '░░  █   ░▒███   ▓██  ▀█ ██▒▒██▒▓██  ▒██░▓██    ▓██░'
+echo -e ' ░ █ █ ▒ ▒▓█  ▄ ▓██▒  ▐▌██▒░██░▓▓█  ░██░▒██    ▒██ '
+echo -e '▒██▒ ▒██▒░▒████▒▒██░   ▓██░░██░▒▒█████▓ ▒██▒   ░██▒'
+echo -e '▒▒ ░ ░▓ ░░░ ▒░ ░░ ▒░   ▒ ▒ ░▓  ░▒▓▒ ▒ ▒ ░ ▒░   ░  ░'
+echo -e '░░   ░▒ ░ ░ ░  ░░ ░░   ░ ▒░ ▒ ░░░▒Programmer░     ░'
+echo -e ' ░    ░     ░      ░   ░ ░  ▒kooscode@github   ░   '
+echo -e ' ░    ░     ░  ░         ░  ░     ░            ░   \n'
 
-echo -e '* XENIUM PROGRAMMER TOOLCHAIN INSTALLATION *\n'
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+	#wifi|--wifi|-w) wifi=1 ;;
+	expert|--expert|-e) expert=1 ;;
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
 
 # Set platform
 DEV_FILE=/sys/firmware/devicetree/base/model
-if grep -q "Onion Omega2+" "$DEV_FILE"; then
-    export PLATFORM=OMEGA2
+if [[ -e $DEV_FILE ]]; then
+    if [[grep -q "Onion Omega2+" "$DEV_FILE"]]; then
+        export PLATFORM=OMEGA2
+        echo '       !! ONION OMEGA2+ DETECTED !!\n'
+    elif [[grep -q "Raspberry Pi" "$DEV_FILE"]]; then
+        export PLATFORM=PI
+        echo '--------------------------------------------'
+        echo -e '\n INSTALLING PI UPDATES AND REQUIREMENTS\n'
+        echo '--------------------------------------------'
+        sudo apt -y update
+        sudo apt -y install build-essential wiringpi git cmake
+    fi
+elif [[ $expert ]]; then
+        echo -e 'Expert mode enabled.'
 else
-    export PLATFORM=PI
-fi
-
-if [ $PLATFORM = "OMEGA2" ]; then
-    echo -e '       !! ONION OMEGA2+ DETECTED !!\n'
-else
-    # general PI pre-reqs
-    echo -e '--------------------------------------------'
-    echo -e '\n INSTALLING PI UPDATES AND REQUIREMENTS\n'
-    echo -e '--------------------------------------------'
-    sudo apt -y update
-    sudo apt -y install build-essential wiringpi git cmake
+        echo -e "You do not appear to be using a supported"
+        echo -e "platform. If you know what you''re doing and"
+        echo -e "want to proceed anyway, run this install"
+        echo -e "script again with the 'expert' flag, and"
+        echo -e "we'll attempt to build xenium-flash  "
+        echo -e "on your platform.\n"
+        echo -e "Bye."
+        exit 0
 fi
 
 # make and install xenium-flash to bin
 echo -e '------------------------------------------'
 echo -e '\n BUILDING XENIUM JTAG AND FLASH TOOLS\n'
 echo -e '------------------------------------------'
-if which g++ | grep -q "g++"; then
+if (which g++ || grep -q "g++" ); then
     cd xenium-flash
     make
     cd ..
@@ -39,6 +64,3 @@ if which g++ | grep -q "g++"; then
 else
     echo -e '\n*** ERROR: No C++ Compiler found!!!!\n'
 fi
-
-
-
