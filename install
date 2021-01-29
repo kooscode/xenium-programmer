@@ -10,7 +10,7 @@ echo -e '░░   ░▒ ░ ░ ░  ░░ ░░   ░ ▒░ ▒ ░░░�
 echo -e ' ░    ░     ░      ░   ░ ░  ▒kooscode@github   ░   '
 echo -e ' ░    ░     ░  ░         ░  ░     ░            ░   \n'
 
-while [[ "$#" -gt 0 ]]; do
+while [ "$#" -gt 0 ]; do
     case $1 in
 	#wifi|--wifi|-w) wifi=1 ;;
 	expert|--expert|-e) expert=1 ;;
@@ -21,11 +21,11 @@ done
 
 # Set platform
 DEV_FILE=/sys/firmware/devicetree/base/model
-if [[ -e $DEV_FILE ]]; then
-    if [[grep -q "Onion Omega2+" "$DEV_FILE"]]; then
+if [ -e $DEV_FILE ]; then
+    if grep -q "Onion Omega2+" "$DEV_FILE"; then
         export PLATFORM=OMEGA2
         echo '       !! ONION OMEGA2+ DETECTED !!\n'
-    elif [[grep -q "Raspberry Pi" "$DEV_FILE"]]; then
+    elif grep -q "Raspberry Pi" "$DEV_FILE"; then
         export PLATFORM=PI
         echo '--------------------------------------------'
         echo -e '\n INSTALLING PI UPDATES AND REQUIREMENTS\n'
@@ -33,7 +33,7 @@ if [[ -e $DEV_FILE ]]; then
         sudo apt -y update
         sudo apt -y install build-essential wiringpi git cmake
     fi
-elif [[ $expert ]]; then
+elif [ $expert ]; then
         echo -e 'Expert mode enabled.'
 else
         echo -e "You do not appear to be using a supported"
