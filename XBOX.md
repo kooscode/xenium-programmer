@@ -1,19 +1,23 @@
-# EXTERNAL BIOS INJECTION - ORIGINAL XBOX 
+# "Home Brew" on ORIGINAL XBOX 
+
+I have always wanted to run old extinct arcade games and home-brew on my original xbox systems and in order to do that, you need to "unlock" its potential via a external chip that allows for 3rd party home-brew software like the Arcade Emulator I want to run to show my kiddos how the old man played games when he was 9yrs old..  I was very curious how these mod chips work and how you can program them and build them from scratch.. so here follows my journey to understand the  resurect my old original 20 year old XBOX and use a home build a chip so I can run my Arcade Emulators to kick my 9yr old's ass in at least some games.
+
+# EXTERNAL BIOS INJECTION - 
 
 ## How does an "Original XBOX Mod" chip work?
 Running unsigned code on the Original XBOX has been around for almost the entire 20 years of the console's existence. Here is a very high level explanation of how modern mod chips force an external BIOS to load on Original XBOX.
 
-- The Original Xbox (OGX) is a plain vanilla Intel CPU and NVidia GPU system and runs a watered down Windows-based Kernel. So for all practical purposes it's pretty much a Windows PC.
+- The Original Xbox (OGX) is a plain vanilla Intel CPU and NVidia GPU system and runs a watered down Windows-based Kernel. So for all practical purposes was modeled after a Windows PC.
 
 - The Kernel, along with boot loaders, are encrypted and stored onboard a Flash chip, termed the "TSOP" chip. 
 
-- When the System starts up, the South Bridge (MCPX) has hard coded instructions to load the BIOS from the TSOP chip, validate signatures and start boot loader execution. If your BIOS is not signed by MS and does not match the hardware embedded signature, the MCPX will abort. (More on that for a later repo ;) )
+- When the System starts up, the South Bridge (MCPX) has hard coded instructions to load the BIOS from the TSOP chip, validate signatures and start boot loader execution. If your BIOS is not signed by MS and does not match the hardware embedded signature, the MCPX will abort.
 
 - One small (but very important) detail is that the MCPX will check the value of bit 0 at address 0 of the TSOP and if it has the value 0, it will abandon loading the BIOS from TSOP and will instead revert to loading a BIOS from the onboard Low Pin Count (LPC) bus!
 
-- So, by grounding the TSOP chip Data 0 line (D0) you can force a 0 value on bit 0 at address 0 and the MCPX will load a BIOS externally! This works on all OGX motherboard revisions 1.0 - 1.4  (Thanks Microsoft!!)
+- So, by grounding the TSOP chip Data 0 line (D0) you can force a 0 value on bit 0 at address 0 and the MCPX will load a BIOS externally! This works on all OGX motherboard revisions 1.0 - 1.4 
 
-- Microsoft finally patched this loophole with the OGX 1.6 motherboard and completely removed the TSOP chip and embedded a BIOS in their own custom silicon that ONLY loads via LPC bus.  But they were also nice enough to honor the LPC Abort signals, so you can easily abort the onboard LPC BIOS on startup and again inject your own via the LPC bus.. (Thanks Microsoft!!)
+- Microsoft finally this loophole with the OGX 1.6 motherboard and completely removed the TSOP chip and embedded a BIOS in their own custom silicon that ONLY loads via LPC bus.  But they were also nice enough to honor the LPC Abort signals, so you can easily abort the onboard LPC BIOS on startup and again inject your own via the LPC bus..
 
 - So - What does a mod chip do?  Well, its pretty easy, it simply asserts D0 to ground on motherboard revision 1.0-1.4 boards or it aborts the onboard LPC BIOS on 1.6 boards and makes its own BIOS available on the LPC bus for the MCPX to load!
 
