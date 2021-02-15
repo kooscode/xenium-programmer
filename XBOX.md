@@ -2,8 +2,6 @@
 
 I have always wanted to run old extinct arcade games and home-brew on my original xbox systems and in order to do that, you need to "unlock" its potential via a external chip that allows for 3rd party home-brew software like the Arcade Emulator I want to run to show my kiddos how the old man played games when he was 9yrs old..  I was very curious how these mod chips work and how you can program them and build them from scratch.. so here follows my journey to understand the  resurect my old original 20 year old XBOX and use a home build a chip so I can run my Arcade Emulators to kick my 9yr old's ass in at least some games.
 
-# EXTERNAL BIOS INJECTION - 
-
 ## How does an "Original XBOX Mod" chip work?
 Running unsigned code on the Original XBOX has been around for almost the entire 20 years of the console's existence. Here is a very high level explanation of how modern mod chips force an external BIOS to load on Original XBOX.
 
