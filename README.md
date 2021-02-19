@@ -1,10 +1,11 @@
 # OpenXenium JTAG and Flash Memory programmer
 
-![boot-partition](images/xenium-flash.jpg)
+## * Read: ["Home Brew" on ORIGINAL XBOX](XBOX.md) - a detailed article on why and how *
+
+![xenium-programmer](images/xenium-flash.jpg)
 
 The tools in this repo will allow you to use a Raspberry PI or an Onion Omega2+ to program an OpenXenium chip with the Xilinx CPLD Firmware via JTAG and will also upload XeniumOS images into the OpenXenium Flash memory via a custom 4-bit bus NOR Flash programming protocol. 
 
-** Read the [HOME BREW ON ORIGNAL XBOX](XBOX.md) write up for gory details on why I went down this rabbit hole **
 
 ### Raspberry PI:
 - This has only been tested on PI Zero W and PI 3B+ models so far.
