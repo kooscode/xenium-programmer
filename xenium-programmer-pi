@@ -1,0 +1,131 @@
+#!/usr/bin/python3
+
+
+# Python wrapper for Xenium programming using Pi-ZeroW PC-Board
+#
+# Copyright (C) 2019 Koos du Preez (kdupreez@hotmail.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+import os
+import subprocess
+import RPi.GPIO as GPIO
+import time
+
+print("██▒▓█████  ███▄    █  ██▓ █    ██  ███▄ ▄███▓")
+print("▒▒ █ █ ▒░▓█   ▀  ██ ▀█   █ ▓██▒ ██  ▓██▒▓██▒▀█▀ ██▒")
+print("░░  █   ░▒███   ▓██  ▀█ ██▒▒██▒▓██  ▒██░▓██    ▓██░")
+print(" ░ █ █ ▒ ▒▓█  ▄ ▓██▒  ▐▌██▒░██░▓▓█  ░██░▒██    ▒██ ")
+print("▒██▒ ▒██▒░▒████▒▒██░   ▓██░░██░▒▒█████▓ ▒██▒   ░██▒")
+print("▒▒ ░ ░▓ ░░░ ▒░ ░░ ▒░   ▒ ▒ ░▓  ░▒▓▒ ▒ ▒ ░ ▒░   ░  ░")
+print("░░   ░▒ ░ ░ ░  ░░ ░░   ░ ▒░ ▒ ░░░▒Programmer░     ░")
+print(" ░    ░     ░      ░   ░ ░  ▒kooscode@github   ░   ")
+print(" ░    ░     ░  ░         ░  ░     ░            ░   ", flush=True)
+
+
+# git root folder.
+programmer_root = os.getcwd()
+
+# Commands
+cmd_jtag =  os.path.join(programmer_root, "xenium-flash/bin/xenium-jtag")
+cmd_jflash =  os.path.join(programmer_root, "xenium-flash/bin/xenium-flash")
+
+# Data Files
+flash_jed = os.path.join(programmer_root, "xenium-bin/xeniumflash.jed")
+xenium_os = os.path.join(programmer_root, "xenium-bin/xenium_blue.bin")
+xenium_jed= os.path.join(programmer_root, "xenium-bin/openxenium.jed")
+
+# LED Pins
+led1 = 19
+led2 = 6
+led3 = 7
+
+def set_ok():
+    GPIO.output(led1, GPIO.HIGH)
+    GPIO.output(led2, GPIO.LOW)
+    GPIO.output(led3, GPIO.LOW)
+
+def set_busy():
+    GPIO.output(led1, GPIO.LOW)
+    GPIO.output(led2, GPIO.HIGH)
+    GPIO.output(led3, GPIO.LOW)
+
+def set_error():
+    GPIO.output(led1, GPIO.LOW)
+    GPIO.output(led2, GPIO.LOW)
+    GPIO.output(led3, GPIO.HIGH)
+
+def set_init():
+    GPIO.output(led1, GPIO.HIGH)
+    time.sleep(0.1)
+    GPIO.output(led2, GPIO.HIGH)
+    time.sleep(0.1)
+    GPIO.output(led3, GPIO.HIGH)
+    time.sleep(0.1)
+
+#using Broadcom pin numbering.
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+#setup pin as output
+GPIO.setup(led1, GPIO.OUT)
+GPIO.setup(led2, GPIO.OUT)
+GPIO.setup(led3, GPIO.OUT)
+
+set_init()
+
+# Program CPLD with BitBus Flash Writer code.
+set_busy()
+print("-------------------------------------")
+print("PROGRAMMING XILINX CPLD: BITBUS BRIDGE")
+print("--------------------------------------", flush=True)
+sub_proc = subprocess.run([cmd_jtag, flash_jed])
+if sub_proc.returncode == 0:
+    set_ok()
+
+    # Write OpenXenium OS to Flash Chip
+    set_busy()
+    print("-----------------------------")
+    print("PROGRAMMING FLASH : XENIUM OS")
+    print("-----------------------------", flush=True)
+    sub_proc = subprocess.run([cmd_jflash, xenium_os, "-y"])
+    if sub_proc.returncode == 0:
+        set_ok()
+
+        set_busy()
+        # Program CPLD with OpenXenium Firmware.
+        print("---------------------------------------------")
+        print("PROGRAMMING XILINX CPLD: OPEN XENIUM FIRMWARE")
+        print("---------------------------------------------", flush=True)
+        sub_proc = subprocess.run([cmd_jtag, xenium_jed])
+        if sub_proc.returncode == 0:
+            set_ok()
+        
+        else:
+            print("ERROR Programming the Xilinx CPLD!")
+            print("Please double check your JTAG connection and wires!", flush=True)
+            set_error()
+    
+    else:
+        set_error()
+        print("ERROR Loading XeniumOS into OpenXenium Flash memory!")
+        print("Please double check your LPC Header connection and wires!", flush=True)
+else:
+    set_error()
+    print("ERROR Programming the Xilinx CPLD!")
+    print("Please double check your JTAG connection and wires!", flush=True)     
+
+# # cleanup GPIO
+# GPIO.cleanup()
