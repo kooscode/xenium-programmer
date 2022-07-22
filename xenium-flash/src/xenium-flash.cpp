@@ -171,6 +171,7 @@ int main(int argc, char** argv)
     {
         //write byte to flash
         flash.Write(i, flash_buffer[i]);
+        while(flash.Read(0) != flash.Read(0));
         
         float current_progress = (float) i / flash_size * 100.0f;
         if (current_progress > progress + 1)
