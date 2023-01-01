@@ -31,7 +31,10 @@ if [ -e $DEV_FILE ]; then
         echo -e '\n INSTALLING PI UPDATES AND REQUIREMENTS\n'
         echo '--------------------------------------------'
         sudo apt -y update
-        sudo apt -y install build-essential wiringpi git cmake
+        sudo apt -y install build-essential git cmake
+        # Installing latest wiringpi compatible with RPI-OS
+        wget https://project-downloads.drogon.net/wiringpi-latest.deb -O /tmp/wiringpi-latest.deb 
+        sudo dpkg -i /tmp/wiringpi-latest.deb
     fi
 elif [ $expert ]; then
         echo -e 'Expert mode enabled.'

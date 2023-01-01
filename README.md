@@ -22,12 +22,13 @@ https://Onion.io/store/omega2p
 
 - Connect to the PI or Omega via SSH or Serial terminal 
 - Clone this repo by running: `git clone https://github.com/kooscode/xenium-programmer.git`
+- Change Dir to cloned repo: `cd xenium-programmer`
 - Then run: `./install`
 
 ## UPDATING XENIUM PROGRAMMER
 
 - Connect to the PI or Omega via SSH or Serial terminal 
-- Pull the latest code with: `git pull`
+- Change dir to xenium-programmer and pull the latest code with: `git pull`
 - Then run: `./install` 
 
 -------------
