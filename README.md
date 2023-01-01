@@ -7,10 +7,12 @@
 The tools in this repo will allow you to use a Raspberry PI or an Onion Omega2+ to program an OpenXenium chip with the Xilinx CPLD Firmware via JTAG and will also upload XeniumOS images into the OpenXenium Flash memory via a custom 4-bit bus NOR Flash programming protocol. 
 
 
-### Raspberry PI:
-- This has only been tested on PI Zero W and PI 3B+ models so far.
+### Raspberry PI [UPDATED to support latest Raspberry PI OS (Bullseye)] :
+- This has only been tested on PI Zero W and PI 3B+ model, but should work for all.
 
-https://www.pishop.us/product/raspberry-pi-zero-w/
+https://www.pishop.us/product/raspberry-pi-zero-w
+
+https://www.pishop.us/product/raspberry-pi-zero-2-w
 
 ### Onion Omega2+:
 - This has been tested and works on the Onion Omega2+.
