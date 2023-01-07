@@ -172,6 +172,23 @@ int main(int argc, char** argv)
         //write byte to flash
         flash.Write(i, flash_buffer[i]);
         
+        //check that write has completed before allowing next chunk to be written
+	    //timeout is 5 seconds per block that is written
+	    uint32_t write_waits = 0;
+	    while (flash.Read(0x00) != flash.Read(0x00))
+        {
+            if (write_waits > 500)
+            {
+                std::cout << std::endl << "ERROR\n\n** XENIUM FLASH WRITE BLOCK TIMEOUT!! **\n" << std::endl;
+                flash.ChipReset();
+                return -1;
+            }
+            else
+            {
+                std::this_thread::sleep_for (std::chrono::milliseconds(10));
+                write_waits++;
+            }
+        }
         float current_progress = (float) i / flash_size * 100.0f;
         if (current_progress > progress + 1)
         {
