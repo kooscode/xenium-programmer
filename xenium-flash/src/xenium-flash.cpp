@@ -114,6 +114,10 @@ int main(int argc, char** argv)
                   << (int) manufacturer << ", Device:" << (int) deviceid << " **\n" << std::endl;
         return -1;
     }
+    else if ((manufacturer == 0xC2 && deviceid == 0x49) || (manufacturer == 0xC2 && deviceid == 0xC4))
+    {
+        std::cout << "OK [MX29LV160DB]" << std::endl; 
+    }
     else
     {
         std::cout << "OK [Spansion S29AL016J]" << std::endl; 
