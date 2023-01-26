@@ -108,15 +108,15 @@ int main(int argc, char** argv)
                   << "the \"xeniumflash.jed\" file first! **" << std::endl;
         return -1;
     }
+    else if ((manufacturer == 0xC2 && deviceid == 0x49) || (manufacturer == 0xC2 && deviceid == 0xC4))
+    {
+        std::cout << "OK [Macronix MX29LV160DB]" << std::endl; 
+    }
     else if (manufacturer != 0x01 || deviceid != 0xC4)
     {
         std::cout << "ERROR\n\n** XENIUM FLASH DEVICE NOT FOUND - Manufacturer:" 
                   << (int) manufacturer << ", Device:" << (int) deviceid << " **\n" << std::endl;
         return -1;
-    }
-    else if ((manufacturer == 0xC2 && deviceid == 0x49) || (manufacturer == 0xC2 && deviceid == 0xC4))
-    {
-        std::cout << "OK [Macronix MX29LV160DB]" << std::endl; 
     }
     else
     {
